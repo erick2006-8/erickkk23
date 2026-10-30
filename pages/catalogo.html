@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo | PixelArek</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Animación de "rebote" cuando el contador del carrito se actualiza */
+        @keyframes cartBump {
+            0%   { transform: scale(1); }
+            30%  { transform: scale(1.55); }
+            55%  { transform: scale(0.85); }
+            75%  { transform: scale(1.15); }
+            100% { transform: scale(1); }
+        }
+        .cart-bump {
+            animation: cartBump 0.55s cubic-bezier(.36,1.5,.5,1);
+        }
+
+        /* Pequeño "destello" en el icono del carrito al añadir */
+        @keyframes cartShake {
+            0%, 100% { transform: rotate(0deg); }
+            20% { transform: rotate(-12deg); }
+            40% { transform: rotate(10deg); }
+            60% { transform: rotate(-6deg); }
+            80% { transform: rotate(4deg); }
+        }
+        .cart-shake {
+            animation: cartShake 0.5s ease;
+        }
+
+        /* Imagen "voladora" que viaja del producto al carrito */
+        .fly-item {
+            position: fixed;
+            z-index: 9999;
+            pointer-events: none;
+            border-radius: 0.5rem;
+            object-fit: cover;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            transition: left 0.65s cubic-bezier(.55,0,.85,.35),
+                        top 0.65s cubic-bezier(.55,0,.85,.35),
+                        width 0.65s ease, height 0.65s ease,
+                        opacity 0.65s ease;
+        }
+
+        /* Toast de confirmación */
+        #cart-toast-container {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            pointer-events: none;
+        }
+        .cart-toast {
+            background: #1f2937;
+            border: 1px solid #7c3aed;
+            color: #fff;
+            padding: 0.65rem 1rem;
+            border-radius: 0.6rem;
+            font-size: 0.85rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            opacity: 0;
+            transform: translateX(20px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        .cart-toast.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .cart-toast .toast-icon {
+            color: #a855f7;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white font-sans">
+
+    <!-- Contenedor de notificaciones (toasts) -->
+    <div id="cart-toast-container"></div>
+
+    <!-- HEADER / NAVEGACIÓN -->
+    <header class="bg-gray-800 sticky top-0 z-50 border-b border-purple-600 shadow-lg">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="../index.html" class="text-2xl font-extrabold tracking-wider text-purple-500 flex items-center gap-2">
+                <i class="fa-solid fa-gamepad"></i> PIXEL<span class="text-white">Arek</span>
+            </a>
+            
+            <div class="hidden md:flex items-center bg-gray-700 rounded-full px-4 py-1.5 w-1/3">
+                <input type="text" id="catalogo-search-input" placeholder="Buscar en el catálogo..." class="bg-transparent w-full focus:outline-none text-sm text-gray-200">
+                <i class="fa-solid fa-magnifying-glass text-gray-400 cursor-pointer hover:text-purple-500"></i>
+            </div>
+
+            <nav class="flex items-center gap-6">
+                <a href="../index.html" class="hover:text-purple-400 transition">Inicio</a>
+                <a href="catalogo.html" class="text-purple-400 font-semibold border-b-2 border-purple-500 pb-1">Catálogo</a>
+                <a href="ofertas.html" class="hover:text-purple-400 transition">Ofertas</a>
+                <a href="carrito.html" id="cart-link" class="cart-target-btn relative text-xl hover:text-purple-400 transition" title="Carrito de compras">
+                    <i id="cart-icon" class="fa-solid fa-cart-shopping"></i>
+                    <span id="cart-count" class="cart-badge-count absolute -top-2 -right-2 bg-purple-600 text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">0</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL (Filtros + Productos) -->
+    <div class="container mx-auto px-4 py-8">
+        <div class="flex flex-col md:flex-row gap-8">
+            
+            <!-- BARRA LATERAL DE FILTROS -->
+            <aside class="w-full md:w-1/4 bg-gray-800 p-6 rounded-xl border border-gray-700 h-fit">
+                <h2 class="text-xl font-bold mb-6 flex items-center gap-2 text-purple-400">
+                    <i class="fa-solid fa-sliders"></i> Filtros
+                </h2>
+                
+                <!-- Filtro de Plataformas -->
+                <div class="mb-6">
+                    <h3 class="font-semibold text-sm uppercase tracking-wider text-gray-400 mb-3">Plataforma</h3>
+                    <div class="space-y-2">
+                        <label class="flex items-center gap-2 cursor-pointer text-sm hover:text-purple-300">
+                            <input type="checkbox" class="rounded accent-purple-600 bg-gray-700 border-gray-600"> PlayStation 5
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer text-sm hover:text-purple-300">
+                            <input type="checkbox" class="rounded accent-purple-600 bg-gray-700 border-gray-600"> Xbox Series X/S
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer text-sm hover:text-purple-300">
+                            <input type="checkbox" class="rounded accent-purple-600 bg-gray-700 border-gray-600"> Nintendo Switch
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer text-sm hover:text-purple-300">
+                            <input type="checkbox" class="rounded accent-purple-600 bg-gray-700 border-gray-600"> PC / Steam
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Filtro de Géneros -->
+                <div class="mb-6">
+                    <h3 class="font-semibold text-sm uppercase tracking-wider text-gray-400 mb-3">Género</h3>
+                    <div class="space-y-2">
+                        <label class="flex items-center gap-2 cursor-pointer text-sm hover:text-purple-300">
+                            <input type="checkbox" class="rounded accent-purple-600 bg-gray-700 border-gray-600"> Acción / Aventura
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer text-sm hover:text-purple-300">
+                            <input type="checkbox" class="rounded accent-purple-600 bg-gray-700 border-gray-600"> Deportes
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer text-sm hover:text-purple-300">
+                            <input type="checkbox" class="rounded accent-purple-600 bg-gray-700 border-gray-600"> Terror
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer text-sm hover:text-purple-300">
+                            <input type="checkbox" class="rounded accent-purple-600 bg-gray-700 border-gray-600"> RPG / Estrategia
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Rango de Precios -->
+                <div>
+                    <h3 class="font-semibold text-sm uppercase tracking-wider text-gray-400 mb-3">Precio Máximo</h3>
+                    <input type="range" min="0" max="100" value="70" class="w-full accent-purple-600 cursor-pointer bg-gray-700 rounded-lg appearance-none h-2">
+                    <div class="flex justify-between text-xs text-gray-400 mt-2">
+                        <span>$0</span>
+                        <span>$100</span>
+                    </div>
+                </div>
+
+                <button class="w-full mt-6 bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-lg transition text-sm">
+                    Aplicar Filtros
+                </button>
+            </aside>
+
+            <!-- CUADRÍCULA DE PRODUCTOS -->
+            <main class="w-full md:w-3/4">
+                <div class="flex justify-between items-center mb-6">
+                    <p class="text-gray-400 text-sm">Mostrando <span class="text-white font-semibold">7</span> productos</p>
+                    <select class="bg-gray-800 text-sm text-gray-200 border border-gray-700 rounded-lg px-3 py-2 focus:outline-none focus:border-purple-500 cursor-pointer">
+                        <option>Ordenar por: Destacados</option>
+                        <option>Precio: Menor a Mayor</option>
+                        <option>Precio: Mayor a Menor</option>
+                        <option>Más valorados</option>
+                    </select>
+                </div>
+
+                <!-- Grid con tus juegos -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    
+                    <!-- Juego 1 -->
+                    <div class="bg-gray-800 rounded-xl overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-1 transition duration-300 flex flex-col h-full border border-gray-700">
+                        <img src="../images/fifa.png" alt="Ea Sports FC 26" class="h-48 w-full object-cover">
+                        <div class="p-5 flex flex-col flex-grow">
+                            <span class="text-xs text-purple-400 font-bold uppercase tracking-wider">PS5 / Xbox / PC</span>
+                            <h3 class="text-xl font-bold mt-1 mb-2 line-clamp-1">Ea Sports FC 26 </h3>
+                            <div class="flex items-center gap-1 text-yellow-400 text-xs mb-4">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+                                <span class="text-gray-400 ml-1">(4.8)</span>
+                            </div>
+                            <div class="mt-auto flex justify-between items-center">
+                                <span class="text-2xl font-black text-white">$59.99</span>
+                                <button class="add-to-cart-btn bg-purple-600 hover:bg-purple-700 p-2.5 rounded-lg text-white transition active:scale-90"
+                                        data-name="Ea Sports FC 26"
+                                        data-price="59.99"
+                                        data-image="../images/fifa.png"
+                                        title="Añadir al carrito">
+                                    <i class="fa-solid fa-cart-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Juego 2 -->
+                    <div class="bg-gray-800 rounded-xl overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-1 transition duration-300 flex flex-col h-full border border-gray-700 relative">
+                        <span class="absolute top-3 right-3 bg-red-600 text-xs font-bold px-2.5 py-1 rounded-md">-25%</span>
+                        <img src="../images/resident.png" alt="Resident Evil 4" class="h-48 w-full object-cover">
+                        <div class="p-5 flex flex-col flex-grow">
+                            <span class="text-xs text-purple-400 font-bold uppercase tracking-wider">Nintendo Switch</span>
+                            <h3 class="text-xl font-bold mt-1 mb-2 line-clamp-1">Resident evil 4</h3>
+                            <div class="flex items-center gap-1 text-yellow-400 text-xs mb-4">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i>
+                                <span class="text-gray-400 ml-1">(4.0)</span>
+                            </div>
+                            <div class="mt-auto flex justify-between items-center">
+                                <div>
+                                    <span class="text-2xl font-black text-white">$44.99</span>
+                                    <span class="text-sm text-gray-400 line-through block">$59.99</span>
+                                </div>
+                                <button class="add-to-cart-btn bg-purple-600 hover:bg-purple-700 p-2.5 rounded-lg text-white transition active:scale-90"
+                                        data-name="Resident Evil 4"
+                                        data-price="44.99"
+                                        data-image="../images/resident.png"
+                                        title="Añadir al carrito">
+                                    <i class="fa-solid fa-cart-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Juego 3 -->
+                    <div class="bg-gray-800 rounded-xl overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-1 transition duration-300 flex flex-col h-full border border-gray-700">
+                        <img src="../images/popy.png" alt="Popy's Playtime 5" class="h-48 w-full object-cover">
+                        <div class="p-5 flex flex-col flex-grow">
+                            <span class="text-xs text-purple-400 font-bold uppercase tracking-wider">PC / Steam</span>
+                            <h3 class="text-xl font-bold mt-1 mb-2 line-clamp-1">Popy's playtime 5</h3>
+                            <div class="flex items-center gap-1 text-yellow-400 text-xs mb-4">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                <span class="text-gray-400 ml-1">(5.0)</span>
+                            </div>
+                            <div class="mt-auto flex justify-between items-center">
+                                <span class="text-2xl font-black text-white">$29.99</span>
+                                <button class="add-to-cart-btn bg-purple-600 hover:bg-purple-700 p-2.5 rounded-lg text-white transition active:scale-90"
+                                        data-name="Popy's Playtime 5"
+                                        data-price="29.99"
+                                        data-image="../images/popy.png"
+                                        title="Añadir al carrito">
+                                    <i class="fa-solid fa-cart-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Juego 4 -->
+                    <div class="bg-gray-800 rounded-xl overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-1 transition duration-300 flex flex-col h-full border border-gray-700">
+                        <img src="../images/call2.png" alt="Call of Duty: Ghost" class="h-48 w-full object-cover">
+                        <div class="p-5 flex flex-col flex-grow">
+                            <span class="text-xs text-purple-400 font-bold uppercase tracking-wider">PS5 / Xbox Series</span>
+                            <h3 class="text-xl font-bold mt-1 mb-2 line-clamp-1">Call of Duty: Ghost</h3>
+                            <div class="flex items-center gap-1 text-yellow-400 text-xs mb-4">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i><i class="fa-regular fa-star"></i>
+                                <span class="text-gray-400 ml-1">(3.7)</span>
+                            </div>
+                            <div class="mt-auto flex justify-between items-center">
+                                <span class="text-2xl font-black text-white">$69.99</span>
+                                <button class="add-to-cart-btn bg-purple-600 hover:bg-purple-700 p-2.5 rounded-lg text-white transition active:scale-90"
+                                        data-name="Call of Duty: Ghost"
+                                        data-price="69.99"
+                                        data-image="../images/call2.png"
+                                        title="Añadir al carrito">
+                                    <i class="fa-solid fa-cart-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Juego 5: Call of Duty Black Ops 6 -->
+                    <div class="bg-gray-800 rounded-xl overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-1 transition duration-300 flex flex-col h-full border border-gray-700 relative">
+                        <span class="absolute top-3 right-3 bg-purple-600 text-xs font-bold px-2.5 py-1 rounded-md">Nuevo</span>
+                        <img src="../images/call.png" alt="Call of Duty: Black Ops 6" class="h-48 w-full object-cover">
+                        <div class="p-5 flex flex-col flex-grow">
+                            <span class="text-xs text-purple-400 font-bold uppercase tracking-wider">PS5 / Xbox / PC</span>
+                            <h3 class="text-xl font-bold mt-1 mb-2 line-clamp-1">Call of Duty: Black Ops 6</h3>
+                            <div class="flex items-center gap-1 text-yellow-400 text-xs mb-4">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                <span class="text-gray-400 ml-1">(4.9)</span>
+                            </div>
+                            <div class="mt-auto flex justify-between items-center">
+                                <span class="text-2xl font-black text-white">$69.99</span>
+                                <button class="add-to-cart-btn bg-purple-600 hover:bg-purple-700 p-2.5 rounded-lg text-white transition active:scale-90"
+                                        data-name="Call of Duty: Black Ops 6"
+                                        data-price="69.99"
+                                        data-image="../images/call.png"
+                                        title="Añadir al carrito">
+                                    <i class="fa-solid fa-cart-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Juego 6: Cyber Reign 2088 -->
+                    <div class="bg-gray-800 rounded-xl overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-1 transition duration-300 flex flex-col h-full border border-gray-700 relative">
+                        <span class="absolute top-3 right-3 bg-cyan-600 text-xs font-bold px-2.5 py-1 rounded-md">-21%</span>
+                        <img src="../images/cyberpunk.jpg" alt="Cyber Reign 2088" class="h-48 w-full object-cover">
+                        <div class="p-5 flex flex-col flex-grow">
+                            <span class="text-xs text-cyan-400 font-bold uppercase tracking-wider">PS5 / PC / Xbox</span>
+                            <h3 class="text-xl font-bold mt-1 mb-2 line-clamp-1">Cyber Reign 2088</h3>
+                            <div class="flex items-center gap-1 text-yellow-400 text-xs mb-4">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+                                <span class="text-gray-400 ml-1">(4.8)</span>
+                            </div>
+                            <div class="mt-auto flex justify-between items-center">
+                                <div>
+                                    <span class="text-2xl font-black text-white">$54.99</span>
+                                    <span class="text-sm text-gray-400 line-through block">$69.99</span>
+                                </div>
+                                <button class="add-to-cart-btn bg-purple-600 hover:bg-purple-700 p-2.5 rounded-lg text-white transition active:scale-90"
+                                        data-name="Cyber Reign 2088"
+                                        data-price="54.99"
+                                        data-image="../images/cyberpunk.jpg"
+                                        title="Añadir al carrito">
+                                    <i class="fa-solid fa-cart-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Juego 7: Elden Valor -->
+                    <div class="bg-gray-800 rounded-xl overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-1 transition duration-300 flex flex-col h-full border border-gray-700 relative">
+                        <span class="absolute top-3 right-3 bg-amber-600 text-xs font-bold px-2.5 py-1 rounded-md">GOTY</span>
+                        <img src="../images/elden.jpg" alt="Elden Valor" class="h-48 w-full object-cover">
+                        <div class="p-5 flex flex-col flex-grow">
+                            <span class="text-xs text-amber-400 font-bold uppercase tracking-wider">PS5 / Xbox / PC</span>
+                            <h3 class="text-xl font-bold mt-1 mb-2 line-clamp-1">Elden Valor</h3>
+                            <div class="flex items-center gap-1 text-yellow-400 text-xs mb-4">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                <span class="text-gray-400 ml-1">(5.0)</span>
+                            </div>
+                            <div class="mt-auto flex justify-between items-center">
+                                <span class="text-2xl font-black text-white">$64.99</span>
+                                <button class="add-to-cart-btn bg-purple-600 hover:bg-purple-700 p-2.5 rounded-lg text-white transition active:scale-90"
+                                        data-name="Elden Valor"
+                                        data-price="64.99"
+                                        data-image="../images/elden.jpg"
+                                        title="Añadir al carrito">
+                                    <i class="fa-solid fa-cart-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-950 text-gray-400 py-12 border-t border-gray-800 mt-20">
+        <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+                <a href="../index.html" class="text-xl font-extrabold text-purple-500 mb-4 block">PIXEL<span class="text-white">Arek</span></a>
+                <p class="text-sm">Tu rincón favorito en internet para conseguir las mejores claves digitales y juegos físicos al precio más competitivo.</p>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-4">Enlaces Útiles</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#" class="hover:text-white transition">Soporte Técnico</a></li>
+                    <li><a href="#" class="hover:text-white transition">Políticas de Devolución</a></li>
+                    <li><a href="#" class="hover:text-white transition">Términos y Condiciones</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-4">Síguenos</h4>
+                <div class="flex gap-4 text-xl">
+                    <a href="#" class="hover:text-purple-500 transition"><i class="fa-brands fa-twitch"></i></a>
+                    <a href="#" class="hover:text-purple-500 transition"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="#" class="hover:text-purple-500 transition"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="#" class="hover:text-purple-500 transition"><i class="fa-brands fa-discord"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="container mx-auto px-4 mt-8 pt-6 border-t border-gray-900 text-center text-xs">
+            <p>&copy; 2026 PixelArek. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="../js/cart-store.js"></script>
+    <script>
+        // Sincronización con PixelCart
+        const CART_KEY = 'pixelarek_cart';
+
+        function getCart() {
+            try {
+                const raw = localStorage.getItem(CART_KEY);
+                return raw ? JSON.parse(raw) : [];
+            } catch (e) {
+                return [];
+            }
+        }
+
+        function saveCart(cart) {
+            localStorage.setItem(CART_KEY, JSON.stringify(cart));
+        }
+
+        function getCartTotals(cart) {
+            let count = 0;
+            let total = 0;
+            cart.forEach(item => {
+                count += item.qty;
+                total += item.qty * item.price;
+            });
+            return { count, total };
+        }
+
+        function formatPrice(value) {
+            return '$' + value.toFixed(2);
+        }
+
+        // Añade (o incrementa) un producto en el carrito
+        function addItemToCart(name, price, image) {
+            const cart = getCart();
+            const existing = cart.find(item => item.name === name);
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                cart.push({ name, price, image, qty: 1 });
+            }
+            saveCart(cart);
+            return getCartTotals(cart);
+        }
+
+        // Actualiza el número del badge y dispara su animación
+        function updateCartBadge(animate) {
+            const { count, total } = getCartTotals(getCart());
+            const countEl = document.getElementById('cart-count');
+            const cartLink = document.getElementById('cart-link');
+            const cartIcon = document.getElementById('cart-icon');
+
+            countEl.textContent = count;
+            cartLink.title = `Carrito: ${count} producto${count === 1 ? '' : 's'} · Total: ${formatPrice(total)}`;
+
+            if (animate) {
+                countEl.classList.remove('cart-bump');
+                cartIcon.classList.remove('cart-shake');
+                // Forzar reflow para poder re-disparar la animación
+                void countEl.offsetWidth;
+                countEl.classList.add('cart-bump');
+                cartIcon.classList.add('cart-shake');
+                setTimeout(() => {
+                    countEl.classList.remove('cart-bump');
+                    cartIcon.classList.remove('cart-shake');
+                }, 600);
+            }
+            return { count, total };
+        }
+
+        // Muestra una notificación tipo toast con el total acumulado
+        function showCartToast(name, total) {
+            const container = document.getElementById('cart-toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'cart-toast';
+            toast.innerHTML = `
+                <i class="fa-solid fa-circle-check toast-icon"></i>
+                <span><strong>${name}</strong> añadido · Total: ${formatPrice(total)}</span>
+            `;
+            container.appendChild(toast);
+
+            requestAnimationFrame(() => toast.classList.add('show'));
+
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => toast.remove(), 300);
+            }, 2200);
+        }
+
+        // Anima la imagen del producto "volando" hacia el icono del carrito
+        function flyToCart(imgSrc, startEl) {
+            const cartIcon = document.getElementById('cart-icon');
+            const startRect = startEl.getBoundingClientRect();
+            const endRect = cartIcon.getBoundingClientRect();
+
+            const flyer = document.createElement('img');
+            flyer.src = imgSrc;
+            flyer.className = 'fly-item';
+            flyer.style.left = startRect.left + 'px';
+            flyer.style.top = startRect.top + 'px';
+            flyer.style.width = startRect.width + 'px';
+            flyer.style.height = startRect.height + 'px';
+            flyer.style.opacity = '1';
+            document.body.appendChild(flyer);
+
+            // Pequeño retraso para que el navegador registre la posición inicial
+            // antes de animar hacia la posición final
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    flyer.style.left = (endRect.left + endRect.width / 2 - 12) + 'px';
+                    flyer.style.top = (endRect.top + endRect.height / 2 - 12) + 'px';
+                    flyer.style.width = '24px';
+                    flyer.style.height = '24px';
+                    flyer.style.opacity = '0.2';
+                });
+            });
+
+            setTimeout(() => {
+                flyer.remove();
+                updateCartBadge(true);
+            }, 650);
+        }
+
+        // Conecta cada botón "Añadir al carrito"
+        document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const name = btn.dataset.name;
+                const price = parseFloat(btn.dataset.price);
+                const image = btn.dataset.image;
+
+                const card = btn.closest('.bg-gray-800');
+                const imgEl = card ? card.querySelector('img') : null;
+
+                const { total } = addItemToCart(name, price, image);
+
+                if (imgEl) {
+                    flyToCart(image, imgEl);
+                } else {
+                    updateCartBadge(true);
+                }
+
+                showCartToast(name, total);
+            });
+        });
+
+        // Al cargar la página, refleja el estado guardado del carrito
+        updateCartBadge(false);
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ofertas Imperdibles | PixelArek Video Game Store</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            background-color: #080c16;
+            color: #f3f4f6;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white font-sans min-h-screen flex flex-col">
+
+    <!-- HEADER / NAVEGACIÓN -->
+    <header class="bg-gray-800 sticky top-0 z-50 border-b border-purple-600 shadow-lg">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="../index.html" class="text-2xl font-extrabold tracking-wider text-purple-500 flex items-center gap-2">
+                <i class="fa-solid fa-gamepad"></i> PIXEL<span class="text-white">Arek</span>
+            </a>
+            
+            <div class="hidden md:flex items-center bg-gray-700 rounded-full px-4 py-1.5 w-1/3">
+                <input type="text" placeholder="Buscar ofertas..." class="bg-transparent w-full focus:outline-none text-sm text-gray-200">
+                <i class="fa-solid fa-magnifying-glass text-gray-400 cursor-pointer hover:text-purple-500"></i>
+            </div>
+
+            <nav class="flex items-center gap-6">
+                <a href="../index.html" class="hover:text-purple-400 transition">Inicio</a>
+                <a href="catalogo.html" class="hover:text-purple-400 transition">Catálogo</a>
+                <a href="ofertas.html" class="text-purple-400 font-semibold border-b-2 border-purple-500 pb-1">Ofertas</a>
+                <a href="carrito.html" id="cart-link" class="cart-target-btn relative text-xl hover:text-purple-400 transition" title="Carrito de compras">
+                    <i id="cart-icon" class="fa-solid fa-cart-shopping"></i>
+                    <span id="cart-count" class="cart-badge-count absolute -top-2 -right-2 bg-purple-600 text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">0</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO DE OFERTAS -->
+    <section class="bg-gradient-to-r from-purple-900 via-indigo-950 to-gray-950 py-12 mb-12 border-b border-purple-500/30">
+        <div class="container mx-auto px-4 text-center">
+            <span class="bg-red-600 text-white text-xs font-black uppercase px-3 py-1 rounded-md tracking-widest">
+                <i class="fa-solid fa-fire mr-1"></i> Ofertas Especiales
+            </span>
+            <h1 class="text-4xl md:text-5xl font-black mt-3 mb-4">DESCUENTOS DIGITALES DE LOCURA</h1>
+            <p class="text-gray-300 max-w-xl mx-auto text-base md:text-lg">Precios imbatibles por tiempo limitado. Claves digitales originales con entrega en menos de 30 segundos.</p>
+        </div>
+    </section>
+
+    <!-- GRID DE OFERTAS -->
+    <main class="container mx-auto px-4 py-4 flex-grow">
+        <div class="flex justify-between items-center mb-8">
+            <h2 class="text-2xl font-bold border-l-4 border-red-500 pl-3">Rebajas Destacadas</h2>
+            <span class="text-xs text-gray-400">Cupón adicional: <strong class="text-yellow-400">PIXEL20</strong> para 20% EXTRA</span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            
+            <!-- Oferta 1: Resident Evil Requiem -->
+            <div class="bg-gray-800 rounded-xl overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-1 transition duration-300 flex flex-col h-full border border-gray-700 relative">
+                <span class="absolute top-3 right-3 bg-red-600 text-xs font-bold px-2.5 py-1 rounded-md shadow-md">-25%</span>
+                <img src="../images/resident.png" alt="Resident Evil Requiem" class="h-48 w-full object-cover">
+                <div class="p-5 flex flex-col flex-grow">
+                    <span class="text-xs text-purple-400 font-bold uppercase tracking-wider">PS5 / Switch</span>
+                    <h3 class="text-xl font-bold mt-1 mb-2 line-clamp-1">Resident Evil Requiem</h3>
+                    <div class="flex items-center gap-1 text-yellow-400 text-xs mb-4">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i>
+                        <span class="text-gray-400 ml-1">(4.8)</span>
+                    </div>
+                    <div class="mt-auto flex justify-between items-center">
+                        <div>
+                            <span class="text-2xl font-black text-white">$44.99</span>
+                            <span class="text-sm text-gray-400 line-through block">$59.99</span>
+                        </div>
+                        <button onclick="addOfferToCart('Resident Evil Requiem', 44.99, '../images/resident.png', 'PS5 / Switch', this)" class="bg-purple-600 hover:bg-purple-700 p-2.5 rounded-lg text-white transition active:scale-90" title="Añadir al carrito">
+                            <i class="fa-solid fa-cart-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Oferta 2: Cyber Reign 2088 -->
+            <div class="bg-gray-800 rounded-xl overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-1 transition duration-300 flex flex-col h-full border border-gray-700 relative">
+                <span class="absolute top-3 right-3 bg-red-600 text-xs font-bold px-2.5 py-1 rounded-md shadow-md">-21%</span>
+                <img src="../images/cyberpunk.jpg" alt="Cyber Reign 2088" class="h-48 w-full object-cover">
+                <div class="p-5 flex flex-col flex-grow">
+                    <span class="text-xs text-cyan-400 font-bold uppercase tracking-wider">PS5 / PC / Xbox</span>
+                    <h3 class="text-xl font-bold mt-1 mb-2 line-clamp-1">Cyber Reign 2088</h3>
+                    <div class="flex items-center gap-1 text-yellow-400 text-xs mb-4">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+                        <span class="text-gray-400 ml-1">(4.8)</span>
+                    </div>
+                    <div class="mt-auto flex justify-between items-center">
+                        <div>
+                            <span class="text-2xl font-black text-white">$54.99</span>
+                            <span class="text-sm text-gray-400 line-through block">$69.99</span>
+                        </div>
+                        <button onclick="addOfferToCart('Cyber Reign 2088', 54.99, '../images/cyberpunk.jpg', 'PS5 / PC / Xbox', this)" class="bg-purple-600 hover:bg-purple-700 p-2.5 rounded-lg text-white transition active:scale-90" title="Añadir al carrito">
+                            <i class="fa-solid fa-cart-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Oferta 3: Call of Duty: Ghosts -->
+            <div class="bg-gray-800 rounded-xl overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-1 transition duration-300 flex flex-col h-full border border-gray-700 relative">
+                <span class="absolute top-3 right-3 bg-red-600 text-xs font-bold px-2.5 py-1 rounded-md shadow-md">-50%</span>
+                <img src="../images/call2.png" alt="Call of Duty: Ghosts" class="h-48 w-full object-cover">
+                <div class="p-5 flex flex-col flex-grow">
+                    <span class="text-xs text-purple-400 font-bold uppercase tracking-wider">Multiplataforma</span>
+                    <h3 class="text-xl font-bold mt-1 mb-2 line-clamp-1">Call of Duty: Ghosts</h3>
+                    <div class="flex items-center gap-1 text-yellow-400 text-xs mb-4">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i><i class="fa-regular fa-star"></i>
+                        <span class="text-gray-400 ml-1">(4.2)</span>
+                    </div>
+                    <div class="mt-auto flex justify-between items-center">
+                        <div>
+                            <span class="text-2xl font-black text-white">$19.99</span>
+                            <span class="text-sm text-gray-400 line-through block">$39.99</span>
+                        </div>
+                        <button onclick="addOfferToCart('Call of Duty: Ghosts', 19.99, '../images/call2.png', 'Multiplataforma', this)" class="bg-purple-600 hover:bg-purple-700 p-2.5 rounded-lg text-white transition active:scale-90" title="Añadir al carrito">
+                            <i class="fa-solid fa-cart-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Oferta 4: Poppy Playtime 5 -->
+            <div class="bg-gray-800 rounded-xl overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-1 transition duration-300 flex flex-col h-full border border-gray-700 relative">
+                <span class="absolute top-3 right-3 bg-red-600 text-xs font-bold px-2.5 py-1 rounded-md shadow-md">-25%</span>
+                <img src="../images/popy.png" alt="Poppy Playtime 5" class="h-48 w-full object-cover">
+                <div class="p-5 flex flex-col flex-grow">
+                    <span class="text-xs text-purple-400 font-bold uppercase tracking-wider">PC / Steam</span>
+                    <h3 class="text-xl font-bold mt-1 mb-2 line-clamp-1">Poppy Playtime 5</h3>
+                    <div class="flex items-center gap-1 text-yellow-400 text-xs mb-4">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        <span class="text-gray-400 ml-1">(4.6)</span>
+                    </div>
+                    <div class="mt-auto flex justify-between items-center">
+                        <div>
+                            <span class="text-2xl font-black text-white">$29.99</span>
+                            <span class="text-sm text-gray-400 line-through block">$39.99</span>
+                        </div>
+                        <button onclick="addOfferToCart('Poppy Playtime 5', 29.99, '../images/popy.png', 'PC / Steam', this)" class="bg-purple-600 hover:bg-purple-700 p-2.5 rounded-lg text-white transition active:scale-90" title="Añadir al carrito">
+                            <i class="fa-solid fa-cart-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-950 text-gray-400 py-12 border-t border-gray-800 mt-28">
+        <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+                <a href="../index.html" class="text-xl font-extrabold text-purple-500 mb-4 block">PIXEL<span class="text-white">Arek</span></a>
+                <p class="text-sm">Tu rincón favorito en internet para conseguir las mejores claves digitales y videojuegos al precio más competitivo.</p>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-4">Enlaces Útiles</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="../index.html" class="hover:text-white transition">Página de Inicio</a></li>
+                    <li><a href="catalogo.html" class="hover:text-white transition">Catálogo de Juegos</a></li>
+                    <li><a href="carrito.html" class="hover:text-white transition">Ver Mi Carrito</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-4">Síguenos</h4>
+                <div class="flex gap-4 text-xl">
+                    <a href="#" class="hover:text-purple-500 transition"><i class="fa-brands fa-twitch"></i></a>
+                    <a href="#" class="hover:text-purple-500 transition"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="#" class="hover:text-purple-500 transition"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="#" class="hover:text-purple-500 transition"><i class="fa-brands fa-discord"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="container mx-auto px-4 mt-8 pt-6 border-t border-gray-900 text-center text-xs">
+            <p>&copy; 2026 PixelArek. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Script de Carrito -->
+    <script src="../js/cart-store.js"></script>
+    <script>
+        function addOfferToCart(name, price, image, platform, btnEl) {
+            const card = btnEl ? btnEl.closest('.bg-gray-800') : null;
+            const imgEl = card ? card.querySelector('img') : null;
+
+            PixelCart.addItem({
+                name,
+                price,
+                image,
+                platform
+            });
+
+            if (imgEl) {
+                PixelCart.flyToCart(image, imgEl);
+            }
+            PixelCart.showToast(`<strong>${name}</strong> añadido a tu orden con descuento`, 'success');
+        }
+    </script>
+
+</body>
+</html>

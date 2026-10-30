@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PixelArek | Tienda Oficial de Videojuegos & Claves Digitales</title>
+    <meta name="description" content="Compra los mejores videojuegos para PS5, Xbox Series X, Nintendo Switch y PC al mejor precio. Entrega inmediata de claves oficiales y ofertas exclusivas en PixelArek.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                        display: ['Orbitron', 'sans-serif']
+                    },
+                    colors: {
+                        gaming: {
+                            purple: '#8b5cf6',
+                            neon: '#a855f7',
+                            cyan: '#06b6d4',
+                            dark: '#0b0f19',
+                            card: '#131b2e',
+                            border: '#1f293d'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Custom Glassmorphism & Keyframe Styles -->
+    <style>
+        body {
+            background-color: #080c16;
+            color: #f3f4f6;
+            overflow-x: hidden;
+        }
+
+        .hero-glow {
+            background: radial-gradient(circle at 50% 20%, rgba(139, 92, 246, 0.25) 0%, rgba(6, 182, 212, 0.15) 35%, rgba(8, 12, 22, 0) 70%);
+        }
+
+        .neon-border {
+            border: 1px solid rgba(168, 85, 247, 0.25);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .neon-border:hover {
+            border-color: rgba(168, 85, 247, 0.8);
+            box-shadow: 0 0 25px -5px rgba(168, 85, 247, 0.4);
+        }
+
+        .glass-panel {
+            background: rgba(19, 27, 46, 0.75);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .badge-pulse {
+            animation: pulse-glow 2s infinite;
+        }
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 10px rgba(168, 85, 247, 0.6); }
+            50% { box-shadow: 0 0 25px rgba(6, 182, 212, 0.8); }
+        }
+
+        /* Scrollbar personalizable */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b0f19;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #374151;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #8b5cf6;
+        }
+
+        /* Drawer Overlay */
+        .drawer-overlay {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .drawer-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .drawer-content {
+            transform: translateX(100%);
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .drawer-content.active {
+            transform: translateX(0);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col font-sans selection:bg-purple-600 selection:text-white">
+
+    <!-- BARRA SUPERIOR DE PROMOCIONES -->
+    <div class="bg-gradient-to-r from-purple-900 via-indigo-900 to-cyan-900 text-xs py-2 px-4 border-b border-purple-500/20 text-center flex flex-wrap justify-center items-center gap-2 font-medium tracking-wide">
+        <span class="bg-purple-500/30 text-purple-200 px-2 py-0.5 rounded-full font-bold uppercase text-[10px] border border-purple-400/40">⚡ FLASH SALE</span>
+        <span>Aplica el cupón <span class="text-yellow-300 font-extrabold tracking-wider bg-black/40 px-1.5 py-0.5 rounded border border-yellow-400/30">PIXEL20</span> para <strong class="text-white font-bold">20% de descuento</strong> en toda la tienda.</span>
+        <span class="hidden sm:inline text-purple-300/60">|</span>
+        <span class="hidden md:inline text-cyan-300"><i class="fa-solid fa-bolt mr-1"></i> Entrega Digital Inmediata 24/7</span>
+    </div>
+
+    <!-- HEADER / NAVEGACIÓN PRINCIPAL -->
+    <header class="sticky top-0 z-40 bg-gray-950/85 backdrop-blur-md border-b border-gray-800/80 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+            
+            <!-- LOGO -->
+            <a href="index.html" class="flex items-center gap-3 group">
+                <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-purple-600 via-indigo-500 to-cyan-400 p-0.5 shadow-lg shadow-purple-600/30 group-hover:shadow-cyan-500/40 transition duration-300">
+                    <div class="w-full h-full bg-gray-950 rounded-[10px] flex items-center justify-center">
+                        <i class="fa-solid fa-gamepad text-2xl text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400 group-hover:scale-110 transition duration-300"></i>
+                    </div>
+                </div>
+                <div>
+                    <span class="text-2xl font-black tracking-wider font-display">PIXEL<span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400">AREK</span></span>
+                    <span class="block text-[10px] tracking-widest uppercase font-semibold text-gray-400 -mt-1">Video Game Store</span>
+                </div>
+            </a>
+
+            <!-- BUSCADOR CON AUTOCOMPLETADO INTERACTIVO -->
+            <div class="hidden lg:block relative flex-1 max-w-md mx-6">
+                <div class="relative flex items-center">
+                    <input 
+                        type="text" 
+                        id="header-search-input" 
+                        placeholder="Buscar juegos por título o plataforma..."
+                        class="w-full bg-gray-900/90 border border-gray-700/80 rounded-full py-2.5 pl-11 pr-4 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition"
+                    >
+                    <i class="fa-solid fa-magnifying-glass absolute left-4 text-gray-400"></i>
+                    <button id="clear-search-btn" class="hidden absolute right-4 text-gray-400 hover:text-white text-xs">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <!-- Dropdown de resultados rápidos -->
+                <div id="search-results-dropdown" class="hidden absolute left-0 right-0 top-full mt-2 bg-gray-900/95 backdrop-blur-xl border border-gray-700 rounded-xl shadow-2xl p-2 z-50 divide-y divide-gray-800"></div>
+            </div>
+
+            <!-- ENLACES DE NAVEGACIÓN -->
+            <nav class="hidden md:flex items-center gap-7 text-sm font-semibold">
+                <a href="index.html" class="text-purple-400 border-b-2 border-purple-500 pb-1 flex items-center gap-1.5">
+                    <i class="fa-solid fa-house text-xs"></i> Inicio
+                </a>
+                <a href="pages/catalogo.html" class="text-gray-300 hover:text-purple-400 transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-border-all text-xs"></i> Catálogo
+                </a>
+                <a href="pages/ofertas.html" class="text-gray-300 hover:text-red-400 transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-fire text-red-500 text-xs"></i> Ofertas
+                </a>
+                <a href="pages/perfil.html" class="text-gray-300 hover:text-purple-400 transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-user-shield text-xs"></i> Mi Cuenta
+                </a>
+            </nav>
+
+            <!-- ACCIONES DERECHA: WISHLIST & CARRITO -->
+            <div class="flex items-center gap-4">
+                
+                <!-- Botón de Favoritos -->
+                <button id="wishlist-btn" onclick="showWishlistModal()" class="relative p-2.5 rounded-xl bg-gray-900 border border-gray-800 text-gray-300 hover:text-pink-400 hover:border-pink-500/40 transition">
+                    <i class="fa-solid fa-heart text-lg"></i>
+                    <span id="wishlist-badge" class="absolute -top-1.5 -right-1.5 bg-pink-600 text-white text-[10px] font-black w-5 h-5 rounded-full flex items-center justify-center">0</span>
+                </button>
+
+                <!-- Botón de Carrito (Abre Drawer y Enlaza a carrito.html) -->
+                <button 
+                    id="cart-trigger-btn" 
+                    onclick="openCartDrawer()" 
+                    class="cart-target-btn relative flex items-center gap-3 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white px-4 py-2.5 rounded-xl font-bold text-sm shadow-lg shadow-purple-600/30 hover:shadow-purple-500/50 transition transform active:scale-95"
+                >
+                    <i class="fa-solid fa-cart-shopping text-base"></i>
+                    <span class="hidden sm:inline">Carrito</span>
+                    <span id="cart-count" class="cart-badge-count bg-white text-purple-900 text-xs font-black px-2 py-0.5 rounded-full shadow transition-all duration-300">0</span>
+                </button>
+
+                <!-- Botón Mobile Menu -->
+                <button id="mobile-menu-btn" onclick="toggleMobileNav()" class="md:hidden p-2 text-gray-300 hover:text-white">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Nav Menu -->
+        <div id="mobile-nav" class="hidden md:hidden bg-gray-900 border-b border-gray-800 px-4 py-4 space-y-3">
+            <a href="index.html" class="block py-2 text-purple-400 font-bold border-l-4 border-purple-500 pl-3">Inicio</a>
+            <a href="pages/catalogo.html" class="block py-2 text-gray-300 hover:text-purple-400 pl-3">Catálogo</a>
+            <a href="pages/ofertas.html" class="block py-2 text-gray-300 hover:text-red-400 pl-3">Ofertas Flash</a>
+            <a href="pages/carrito.html" class="block py-2 text-gray-300 hover:text-purple-400 pl-3">Mi Carrito de Compras</a>
+            <a href="pages/perfil.html" class="block py-2 text-gray-300 hover:text-purple-400 pl-3">Área de Usuario</a>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        
+        <!-- ==========================================
+             HERO SECTION: BLOCKBUSTER SPOTLIGHT
+             ========================================== -->
+        <section class="relative overflow-hidden pt-8 pb-16 lg:pt-12 lg:pb-24 hero-glow border-b border-gray-800/60">
+            <!-- Background Image con blur y gradiente -->
+            <div class="absolute inset-0 z-0">
+                <img src="images/hero_banner.jpg" alt="Gaming Banner" class="w-full h-full object-cover opacity-25 filter blur-[2px] scale-105">
+                <div class="absolute inset-0 bg-gradient-to-t from-[#080c16] via-[#080c16]/80 to-transparent"></div>
+                <div class="absolute inset-0 bg-gradient-to-r from-[#080c16] via-[#080c16]/70 to-transparent"></div>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    
+                    <!-- Información Principal del Juego Destacado -->
+                    <div class="lg:col-span-7 space-y-6">
+                        
+                        <div class="flex flex-wrap items-center gap-3">
+                            <span class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white text-xs font-black uppercase px-3.5 py-1 rounded-full tracking-wider shadow-lg shadow-purple-600/30 flex items-center gap-1.5">
+                                <i class="fa-solid fa-crown text-yellow-300"></i> LANZAMIENTO ESTRELLA
+                            </span>
+                            <span class="bg-gray-800/90 text-cyan-400 text-xs font-bold px-3 py-1 rounded-full border border-cyan-500/30 flex items-center gap-1.5">
+                                <i class="fa-brands fa-playstation"></i> PS5 / XBOX / PC
+                            </span>
+                            <span class="bg-emerald-950/80 text-emerald-400 text-xs font-semibold px-3 py-1 rounded-full border border-emerald-500/30">
+                                <i class="fa-solid fa-circle-check"></i> Stock Disponible
+                            </span>
+                        </div>
+
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black font-display tracking-tight leading-none text-white">
+                            CALL OF DUTY: <br>
+                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400">
+                                BLACK OPS 6
+                            </span>
+                        </h1>
+
+                        <p class="text-gray-300 text-base sm:text-lg max-w-xl leading-relaxed">
+                            Prepárate para una narrativa de espionaje alucinante y la experiencia multijugador más intensa del año. Incluye el regreso de los legendarios Zombies por rondas y movimiento omnidireccional.
+                        </p>
+
+                        <!-- Precios y Acciones del Hero -->
+                        <div class="pt-2 flex flex-wrap items-center gap-5">
+                            <div class="bg-gray-900/90 border border-gray-800 px-5 py-3 rounded-2xl">
+                                <span class="text-xs text-gray-400 uppercase tracking-wider block font-semibold">Precio Oficial</span>
+                                <div class="flex items-baseline gap-2">
+                                    <span class="text-3xl sm:text-4xl font-black text-white">$69.99</span>
+                                    <span class="text-xs text-emerald-400 font-bold bg-emerald-500/10 px-2 py-0.5 rounded">Clave Global</span>
+                                </div>
+                            </div>
+
+                            <button 
+                                onclick="addGameToCart('Call of Duty: Black Ops 6', 69.99, 'images/call.png', 'PS5 / Xbox / PC', null, this)"
+                                class="bg-gradient-to-r from-purple-600 via-indigo-600 to-cyan-500 hover:from-purple-500 hover:to-cyan-400 text-white font-extrabold px-8 py-4 rounded-2xl shadow-xl shadow-purple-600/40 hover:shadow-cyan-500/50 transition transform hover:-translate-y-1 active:translate-y-0 flex items-center gap-3 text-base"
+                            >
+                                <i class="fa-solid fa-cart-plus text-lg"></i>
+                                <span>Comprar Ahora</span>
+                            </button>
+
+                            <button 
+                                onclick="openTrailerModal('Call of Duty: Black Ops 6', 'Adéntrate en una conspiración al estilo de los años 90 con acción cinematográfica implacable, 16 mapas multijugador nuevos y la experiencia de juego más fluida jamás creada.')"
+                                class="bg-gray-900/90 hover:bg-gray-800 text-gray-200 border border-gray-700 font-bold px-6 py-4 rounded-2xl transition flex items-center gap-2 hover:border-purple-500"
+                            >
+                                <i class="fa-solid fa-play text-purple-400"></i>
+                                <span>Ver Tráiler</span>
+                            </button>
+                        </div>
+
+                        <!-- Mini estadísticas / Trust badges -->
+                        <div class="pt-4 grid grid-cols-3 gap-4 border-t border-gray-800/80 max-w-lg">
+                            <div>
+                                <div class="text-xl font-black text-purple-400 font-display">100%</div>
+                                <div class="text-xs text-gray-400">Activación Garantizada</div>
+                            </div>
+                            <div>
+                                <div class="text-xl font-black text-cyan-400 font-display">&lt; 30s</div>
+                                <div class="text-xs text-gray-400">Entrega de Clave</div>
+                            </div>
+                            <div>
+                                <div class="text-xl font-black text-yellow-400 font-display">4.9 ★</div>
+                                <div class="text-xs text-gray-400">+50k Reseñas</div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Portada 3D Flotante con Badge de Descuento -->
+                    <div class="lg:col-span-5 flex justify-center">
+                        <div class="relative group max-w-sm w-full">
+                            <div class="absolute -inset-1 bg-gradient-to-r from-purple-600 to-cyan-500 rounded-3xl blur-xl opacity-40 group-hover:opacity-75 transition duration-500"></div>
+                            <div class="relative bg-gray-900 rounded-2xl overflow-hidden border border-gray-800 shadow-2xl">
+                                <img src="images/call.png" alt="Call of Duty: Black Ops 6" class="w-full h-auto object-cover transform group-hover:scale-105 transition duration-500">
+                                <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-gray-950 via-gray-950/80 to-transparent p-6 text-center">
+                                    <span class="text-xs text-purple-400 font-bold uppercase tracking-wider block mb-1">Disponible Hoy Mismo</span>
+                                    <p class="text-white font-bold text-sm">Edición Digital Estándar (PlayStation 5)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             CONTADOR DE OFERTAS FLASH (FLASH SALE)
+             ========================================== -->
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 relative z-20">
+            <div class="bg-gradient-to-r from-gray-900 via-purple-950/40 to-gray-900 border border-purple-500/30 rounded-2xl p-6 shadow-2xl backdrop-blur-xl flex flex-col md:flex-row items-center justify-between gap-6">
+                
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-red-600/20 border border-red-500/30 flex items-center justify-center text-red-500 text-2xl animate-pulse">
+                        <i class="fa-solid fa-fire"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-black text-white font-display">OFERTAS RELÁMPAGO DE FIN DE SEMANA</h2>
+                        <p class="text-xs text-gray-400">Precios especiales por tiempo limitado. ¡Los códigos vuelan!</p>
+                    </div>
+                </div>
+
+                <!-- Temporizador Countdown -->
+                <div class="flex items-center gap-3 text-center">
+                    <div class="bg-gray-950/90 border border-gray-800 px-3.5 py-2 rounded-xl min-w-[55px]">
+                        <span id="timer-hours" class="text-xl font-black text-purple-400 font-display">14</span>
+                        <span class="block text-[10px] text-gray-400 font-semibold uppercase">Horas</span>
+                    </div>
+                    <span class="text-xl font-bold text-purple-400">:</span>
+                    <div class="bg-gray-950/90 border border-gray-800 px-3.5 py-2 rounded-xl min-w-[55px]">
+                        <span id="timer-minutes" class="text-xl font-black text-purple-400 font-display">48</span>
+                        <span class="block text-[10px] text-gray-400 font-semibold uppercase">Min</span>
+                    </div>
+                    <span class="text-xl font-bold text-purple-400">:</span>
+                    <div class="bg-gray-950/90 border border-gray-800 px-3.5 py-2 rounded-xl min-w-[55px]">
+                        <span id="timer-seconds" class="text-xl font-black text-cyan-400 font-display">22</span>
+                        <span class="block text-[10px] text-gray-400 font-semibold uppercase">Seg</span>
+                    </div>
+                    <a href="pages/ofertas.html" class="ml-4 bg-purple-600/30 hover:bg-purple-600 text-purple-300 hover:text-white border border-purple-500/40 px-4 py-2.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 whitespace-nowrap">
+                        Ver todas <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ==========================================
+             CATÁLOGO INTERACTIVO & FILTROS
+             ========================================== -->
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+                <div>
+                    <span class="text-purple-400 text-xs font-extrabold uppercase tracking-widest block mb-2">
+                        <i class="fa-solid fa-gamepad mr-1"></i> CATÁLOGO PREMIUM
+                    </span>
+                    <h2 class="text-3xl sm:text-4xl font-black text-white font-display">
+                        JUEGOS DESTACADOS
+                    </h2>
+                    <p class="text-gray-400 text-sm mt-1">Explora títulos aclamados con activación oficial instantánea.</p>
+                </div>
+
+                <!-- Filtros por Plataforma -->
+                <div class="flex flex-wrap items-center gap-2" id="platform-tabs">
+                    <button onclick="filterCatalog('all', this)" class="tab-btn active px-4 py-2 rounded-xl text-xs font-bold bg-purple-600 text-white shadow-md shadow-purple-600/30 transition">
+                        Todos
+                    </button>
+                    <button onclick="filterCatalog('PS5', this)" class="tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-gray-900 hover:bg-gray-800 text-gray-300 border border-gray-800 transition flex items-center gap-1.5">
+                        <i class="fa-brands fa-playstation text-blue-400"></i> PS5
+                    </button>
+                    <button onclick="filterCatalog('Xbox', this)" class="tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-gray-900 hover:bg-gray-800 text-gray-300 border border-gray-800 transition flex items-center gap-1.5">
+                        <i class="fa-brands fa-xbox text-green-400"></i> Xbox Series
+                    </button>
+                    <button onclick="filterCatalog('Switch', this)" class="tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-gray-900 hover:bg-gray-800 text-gray-300 border border-gray-800 transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-gamepad text-red-400"></i> Switch
+                    </button>
+                    <button onclick="filterCatalog('PC', this)" class="tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-gray-900 hover:bg-gray-800 text-gray-300 border border-gray-800 transition flex items-center gap-1.5">
+                        <i class="fa-brands fa-steam text-cyan-400"></i> PC / Steam
+                    </button>
+                </div>
+            </div>
+
+            <!-- GRID PRINCIPAL DE PRODUCTOS -->
+            <div id="games-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+
+                <!-- JUEGO 1: Call of Duty Black Ops 6 -->
+                <article class="game-card bg-gray-900/90 rounded-2xl overflow-hidden border border-gray-800 hover:border-purple-500/60 shadow-lg hover:shadow-2xl hover:shadow-purple-950/40 transition duration-300 flex flex-col group" data-platform="PS5 Xbox PC" data-genre="Acción" data-name="Call of Duty: Black Ops 6" data-price="69.99">
+                    <div class="relative overflow-hidden aspect-[3/4] bg-gray-950">
+                        <span class="absolute top-3 left-3 z-10 bg-purple-600 text-white text-[11px] font-black uppercase px-2.5 py-1 rounded-md shadow">
+                            Top Ventas
+                        </span>
+                        <button onclick="toggleWishlistBtn('Call of Duty: Black Ops 6', this)" class="wishlist-toggle-btn absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-gray-950/70 hover:bg-pink-600 text-gray-300 hover:text-white flex items-center justify-center transition" title="Añadir a lista de deseos">
+                            <i class="fa-regular fa-heart text-sm"></i>
+                        </button>
+                        <img src="images/call.png" alt="Call of Duty: Black Ops 6" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-gray-950 via-transparent to-transparent opacity-60"></div>
+                        
+                        <!-- Overlay botón vista rápida -->
+                        <div class="absolute inset-0 bg-gray-950/60 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center p-4">
+                            <button onclick="openQuickView('Call of Duty: Black Ops 6', 69.99, 'images/call.png', 'PS5 / Xbox / PC', 'Acción / Shooter', 4.9, 'La nueva entrega legendaria de la saga Call of Duty desarrollada por Treyarch y Raven Software.', null)" class="bg-gray-900/90 hover:bg-purple-600 text-white px-4 py-2 rounded-xl text-xs font-bold border border-gray-700 transition flex items-center gap-2">
+                                <i class="fa-solid fa-eye"></i> Vista Rápida
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="p-5 flex flex-col flex-grow justify-between space-y-4">
+                        <div>
+                            <div class="flex items-center justify-between text-xs text-gray-400 mb-1.5">
+                                <span class="text-purple-400 font-bold uppercase tracking-wider text-[11px]">PS5 / Xbox / PC</span>
+                                <span class="flex items-center gap-1 text-yellow-400 font-semibold"><i class="fa-solid fa-star text-[11px]"></i> 4.9</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-white group-hover:text-purple-400 transition line-clamp-1">Call of Duty: Black Ops 6</h3>
+                            <p class="text-xs text-gray-400 mt-1 line-clamp-2">Campaña de espionaje en los 90, multijugador con 16 mapas y el esperado regreso de Zombies.</p>
+                        </div>
+
+                        <div class="pt-3 border-t border-gray-800/80 flex items-center justify-between">
+                            <div>
+                                <span class="text-2xl font-black text-white font-display">$69.99</span>
+                            </div>
+                            <button 
+                                onclick="addGameToCart('Call of Duty: Black Ops 6', 69.99, 'images/call.png', 'PS5 / Xbox / PC', null, this)"
+                                class="bg-purple-600 hover:bg-purple-500 text-white px-3.5 py-2.5 rounded-xl font-bold text-xs flex items-center gap-2 shadow-md shadow-purple-600/30 transition transform active:scale-90"
+                                title="Añadir al carrito"
+                            >
+                                <i class="fa-solid fa-cart-plus"></i>
+                                <span>Añadir</span>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- JUEGO 2: Cyber Reign 2088 -->
+                <article class="game-card bg-gray-900/90 rounded-2xl overflow-hidden border border-gray-800 hover:border-cyan-500/60 shadow-lg hover:shadow-2xl hover:shadow-cyan-950/40 transition duration-300 flex flex-col group" data-platform="PS5 Xbox PC" data-genre="RPG" data-name="Cyber Reign 2088" data-price="54.99">
+                    <div class="relative overflow-hidden aspect-[3/4] bg-gray-950">
+                        <span class="absolute top-3 left-3 z-10 bg-cyan-600 text-white text-[11px] font-black uppercase px-2.5 py-1 rounded-md shadow">
+                            -21% OFF
+                        </span>
+                        <button onclick="toggleWishlistBtn('Cyber Reign 2088', this)" class="wishlist-toggle-btn absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-gray-950/70 hover:bg-pink-600 text-gray-300 hover:text-white flex items-center justify-center transition">
+                            <i class="fa-regular fa-heart text-sm"></i>
+                        </button>
+                        <img src="images/cyberpunk.jpg" alt="Cyber Reign 2088" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-gray-950 via-transparent to-transparent opacity-60"></div>
+                        
+                        <div class="absolute inset-0 bg-gray-950/60 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center p-4">
+                            <button onclick="openQuickView('Cyber Reign 2088', 54.99, 'images/cyberpunk.jpg', 'PS5 / PC / Xbox', 'Cyberpunk RPG', 4.8, 'Un RPG de acción futurista donde encarnas a un samurái cibernético en el bajo mundo de Neo-Kyoto.', 69.99)" class="bg-gray-900/90 hover:bg-cyan-600 text-white px-4 py-2 rounded-xl text-xs font-bold border border-gray-700 transition flex items-center gap-2">
+                                <i class="fa-solid fa-eye"></i> Vista Rápida
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="p-5 flex flex-col flex-grow justify-between space-y-4">
+                        <div>
+                            <div class="flex items-center justify-between text-xs text-gray-400 mb-1.5">
+                                <span class="text-cyan-400 font-bold uppercase tracking-wider text-[11px]">PS5 / PC / Xbox</span>
+                                <span class="flex items-center gap-1 text-yellow-400 font-semibold"><i class="fa-solid fa-star text-[11px]"></i> 4.8</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-white group-hover:text-cyan-400 transition line-clamp-1">Cyber Reign 2088</h3>
+                            <p class="text-xs text-gray-400 mt-1 line-clamp-2">Domina katanas de plasma y combate a corporaciones rebeldes en una metrópolis cyberpunk.</p>
+                        </div>
+
+                        <div class="pt-3 border-t border-gray-800/80 flex items-center justify-between">
+                            <div>
+                                <span class="text-2xl font-black text-cyan-400 font-display">$54.99</span>
+                                <span class="text-xs text-gray-500 line-through block">$69.99</span>
+                            </div>
+                            <button 
+                                onclick="addGameToCart('Cyber Reign 2088', 54.99, 'images/cyberpunk.jpg', 'PS5 / PC / Xbox', 69.99, this)"
+                                class="bg-cyan-600 hover:bg-cyan-500 text-white px-3.5 py-2.5 rounded-xl font-bold text-xs flex items-center gap-2 shadow-md shadow-cyan-600/30 transition transform active:scale-90"
+                            >
+                                <i class="fa-solid fa-cart-plus"></i>
+                                <span>Añadir</span>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- JUEGO 3: Elden Valor -->
+                <article class="game-card bg-gray-900/90 rounded-2xl overflow-hidden border border-gray-800 hover:border-amber-500/60 shadow-lg hover:shadow-2xl hover:shadow-amber-950/40 transition duration-300 flex flex-col group" data-platform="PS5 Xbox PC" data-genre="RPG" data-name="Elden Valor" data-price="64.99">
+                    <div class="relative overflow-hidden aspect-[3/4] bg-gray-950">
+                        <span class="absolute top-3 left-3 z-10 bg-amber-600 text-white text-[11px] font-black uppercase px-2.5 py-1 rounded-md shadow">
+                            GOTY Edition
+                        </span>
+                        <button onclick="toggleWishlistBtn('Elden Valor', this)" class="wishlist-toggle-btn absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-gray-950/70 hover:bg-pink-600 text-gray-300 hover:text-white flex items-center justify-center transition">
+                            <i class="fa-regular fa-heart text-sm"></i>
+                        </button>
+                        <img src="images/elden.jpg" alt="Elden Valor" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-gray-950 via-transparent to-transparent opacity-60"></div>
+
+                        <div class="absolute inset-0 bg-gray-950/60 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center p-4">
+                            <button onclick="openQuickView('Elden Valor', 64.99, 'images/elden.jpg', 'PS5 / Xbox / PC', 'Dark Fantasy RPG', 5.0, 'Una odisea implacable de fantasía oscura con jefes monumentales y un mundo abierto sin igual.', null)" class="bg-gray-900/90 hover:bg-amber-600 text-white px-4 py-2 rounded-xl text-xs font-bold border border-gray-700 transition flex items-center gap-2">
+                                <i class="fa-solid fa-eye"></i> Vista Rápida
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="p-5 flex flex-col flex-grow justify-between space-y-4">
+                        <div>
+                            <div class="flex items-center justify-between text-xs text-gray-400 mb-1.5">
+                                <span class="text-amber-400 font-bold uppercase tracking-wider text-[11px]">PS5 / Xbox / PC</span>
+                                <span class="flex items-center gap-1 text-yellow-400 font-semibold"><i class="fa-solid fa-star text-[11px]"></i> 5.0</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-white group-hover:text-amber-400 transition line-clamp-1">Elden Valor</h3>
+                            <p class="text-xs text-gray-400 mt-1 line-clamp-2">Explora reinos colosales, forja armas sagradas y desafía dragones ancestrales bajo la luna roja.</p>
+                        </div>
+
+                        <div class="pt-3 border-t border-gray-800/80 flex items-center justify-between">
+                            <div>
+                                <span class="text-2xl font-black text-amber-400 font-display">$64.99</span>
+                            </div>
+                            <button 
+                                onclick="addGameToCart('Elden Valor', 64.99, 'images/elden.jpg', 'PS5 / Xbox / PC', null, this)"
+                                class="bg-amber-600 hover:bg-amber-500 text-white px-3.5 py-2.5 rounded-xl font-bold text-xs flex items-center gap-2 shadow-md shadow-amber-600/30 transition transform active:scale-90"
+                            >
+                                <i class="fa-solid fa-cart-plus"></i>
+                                <span>Añadir</span>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- JUEGO 4: EA Sports FC 26 -->
+                <article class="game-card bg-gray-900/90 rounded-2xl overflow-hidden border border-gray-800 hover:border-purple-500/60 shadow-lg hover:shadow-2xl hover:shadow-purple-950/40 transition duration-300 flex flex-col group" data-platform="PS5 Xbox PC Switch" data-genre="Deportes" data-name="EA Sports FC 26" data-price="59.99">
+                    <div class="relative overflow-hidden aspect-[3/4] bg-gray-950">
+                        <span class="absolute top-3 left-3 z-10 bg-emerald-600 text-white text-[11px] font-black uppercase px-2.5 py-1 rounded-md shadow">
+                            Deportes #1
+                        </span>
+                        <button onclick="toggleWishlistBtn('EA Sports FC 26', this)" class="wishlist-toggle-btn absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-gray-950/70 hover:bg-pink-600 text-gray-300 hover:text-white flex items-center justify-center transition">
+                            <i class="fa-regular fa-heart text-sm"></i>
+                        </button>
+                        <img src="images/fifa.png" alt="EA Sports FC 26" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-gray-950 via-transparent to-transparent opacity-60"></div>
+
+                        <div class="absolute inset-0 bg-gray-950/60 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center p-4">
+                            <button onclick="openQuickView('EA Sports FC 26', 59.99, 'images/fifa.png', 'PS5 / Xbox / PC / Switch', 'Deportes / Fútbol', 4.7, 'El simulador definitivo de fútbol con licencias oficiales de la UEFA Champions League, Premier League y más.', null)" class="bg-gray-900/90 hover:bg-purple-600 text-white px-4 py-2 rounded-xl text-xs font-bold border border-gray-700 transition flex items-center gap-2">
+                                <i class="fa-solid fa-eye"></i> Vista Rápida
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="p-5 flex flex-col flex-grow justify-between space-y-4">
+                        <div>
+                            <div class="flex items-center justify-between text-xs text-gray-400 mb-1.5">
+                                <span class="text-purple-400 font-bold uppercase tracking-wider text-[11px]">Multiplataforma</span>
+                                <span class="flex items-center gap-1 text-yellow-400 font-semibold"><i class="fa-solid fa-star text-[11px]"></i> 4.7</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-white group-hover:text-purple-400 transition line-clamp-1">EA Sports FC 26</h3>
+                            <p class="text-xs text-gray-400 mt-1 line-clamp-2">Tecnología HyperMotionV, modo Ultimate Team renovado y físicas hiperrealistas.</p>
+                        </div>
+
+                        <div class="pt-3 border-t border-gray-800/80 flex items-center justify-between">
+                            <div>
+                                <span class="text-2xl font-black text-white font-display">$59.99</span>
+                            </div>
+                            <button 
+                                onclick="addGameToCart('EA Sports FC 26', 59.99, 'images/fifa.png', 'PS5 / Xbox / PC / Switch', null, this)"
+                                class="bg-purple-600 hover:bg-purple-500 text-white px-3.5 py-2.5 rounded-xl font-bold text-xs flex items-center gap-2 shadow-md shadow-purple-600/30 transition transform active:scale-90"
+                            >
+                                <i class="fa-solid fa-cart-plus"></i>
+                                <span>Añadir</span>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- JUEGO 5: Resident Evil Requiem -->
+                <article class="game-card bg-gray-900/90 rounded-2xl overflow-hidden border border-gray-800 hover:border-red-500/60 shadow-lg hover:shadow-2xl hover:shadow-red-950/40 transition duration-300 flex flex-col group" data-platform="PS5 Switch PC" data-genre="Terror" data-name="Resident Evil Requiem" data-price="44.99">
+                    <div class="relative overflow-hidden aspect-[3/4] bg-gray-950">
+                        <span class="absolute top-3 left-3 z-10 bg-red-600 text-white text-[11px] font-black uppercase px-2.5 py-1 rounded-md shadow">
+                            -25% OFF
+                        </span>
+                        <button onclick="toggleWishlistBtn('Resident Evil Requiem', this)" class="wishlist-toggle-btn absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-gray-950/70 hover:bg-pink-600 text-gray-300 hover:text-white flex items-center justify-center transition">
+                            <i class="fa-regular fa-heart text-sm"></i>
+                        </button>
+                        <img src="images/resident.png" alt="Resident Evil Requiem" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-gray-950 via-transparent to-transparent opacity-60"></div>
+
+                        <div class="absolute inset-0 bg-gray-950/60 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center p-4">
+                            <button onclick="openQuickView('Resident Evil Requiem', 44.99, 'images/resident.png', 'PS5 / Switch / PC', 'Survival Horror', 4.8, 'Sobrevive a una pesadilla biológica con munición escasa, puzles intensos y terror inmersivo.', 59.99)" class="bg-gray-900/90 hover:bg-red-600 text-white px-4 py-2 rounded-xl text-xs font-bold border border-gray-700 transition flex items-center gap-2">
+                                <i class="fa-solid fa-eye"></i> Vista Rápida
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="p-5 flex flex-col flex-grow justify-between space-y-4">
+                        <div>
+                            <div class="flex items-center justify-between text-xs text-gray-400 mb-1.5">
+                                <span class="text-red-400 font-bold uppercase tracking-wider text-[11px]">PS5 / Switch / PC</span>
+                                <span class="flex items-center gap-1 text-yellow-400 font-semibold"><i class="fa-solid fa-star text-[11px]"></i> 4.8</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-white group-hover:text-red-400 transition line-clamp-1">Resident Evil Requiem</h3>
+                            <p class="text-xs text-gray-400 mt-1 line-clamp-2">Terror de supervivencia clásico con gráficos fotorrealistas con el motor RE Engine.</p>
+                        </div>
+
+                        <div class="pt-3 border-t border-gray-800/80 flex items-center justify-between">
+                            <div>
+                                <span class="text-2xl font-black text-red-400 font-display">$44.99</span>
+                                <span class="text-xs text-gray-500 line-through block">$59.99</span>
+                            </div>
+                            <button 
+                                onclick="addGameToCart('Resident Evil Requiem', 44.99, 'images/resident.png', 'PS5 / Switch / PC', 59.99, this)"
+                                class="bg-red-600 hover:bg-red-500 text-white px-3.5 py-2.5 rounded-xl font-bold text-xs flex items-center gap-2 shadow-md shadow-red-600/30 transition transform active:scale-90"
+                            >
+                                <i class="fa-solid fa-cart-plus"></i>
+                                <span>Añadir</span>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- JUEGO 6: Poppy Playtime 5 -->
+                <article class="game-card bg-gray-900/90 rounded-2xl overflow-hidden border border-gray-800 hover:border-purple-500/60 shadow-lg hover:shadow-2xl hover:shadow-purple-950/40 transition duration-300 flex flex-col group" data-platform="PC PS5" data-genre="Terror" data-name="Poppy Playtime 5" data-price="29.99">
+                    <div class="relative overflow-hidden aspect-[3/4] bg-gray-950">
+                        <span class="absolute top-3 left-3 z-10 bg-indigo-600 text-white text-[11px] font-black uppercase px-2.5 py-1 rounded-md shadow">
+                            Misterio
+                        </span>
+                        <button onclick="toggleWishlistBtn('Poppy Playtime 5', this)" class="wishlist-toggle-btn absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-gray-950/70 hover:bg-pink-600 text-gray-300 hover:text-white flex items-center justify-center transition">
+                            <i class="fa-regular fa-heart text-sm"></i>
+                        </button>
+                        <img src="images/popy.png" alt="Poppy Playtime 5" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-gray-950 via-transparent to-transparent opacity-60"></div>
+
+                        <div class="absolute inset-0 bg-gray-950/60 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center p-4">
+                            <button onclick="openQuickView('Poppy Playtime 5', 29.99, 'images/popy.png', 'PC / Steam / PS5', 'Aventura / Terror', 4.6, 'El capítulo más oscuro de la fábrica de juguetes Playtime Co. Nuevas herramientas mecánicas y horrores.', null)" class="bg-gray-900/90 hover:bg-purple-600 text-white px-4 py-2 rounded-xl text-xs font-bold border border-gray-700 transition flex items-center gap-2">
+                                <i class="fa-solid fa-eye"></i> Vista Rápida
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="p-5 flex flex-col flex-grow justify-between space-y-4">
+                        <div>
+                            <div class="flex items-center justify-between text-xs text-gray-400 mb-1.5">
+                                <span class="text-indigo-400 font-bold uppercase tracking-wider text-[11px]">PC / Steam / PS5</span>
+                                <span class="flex items-center gap-1 text-yellow-400 font-semibold"><i class="fa-solid fa-star text-[11px]"></i> 4.6</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-white group-hover:text-indigo-400 transition line-clamp-1">Poppy Playtime 5</h3>
+                            <p class="text-xs text-gray-400 mt-1 line-clamp-2">Desentraña la conspiración final de la fábrica mientras evades juguetes letales en la penumbra.</p>
+                        </div>
+
+                        <div class="pt-3 border-t border-gray-800/80 flex items-center justify-between">
+                            <div>
+                                <span class="text-2xl font-black text-white font-display">$29.99</span>
+                            </div>
+                            <button 
+                                onclick="addGameToCart('Poppy Playtime 5', 29.99, 'images/popy.png', 'PC / Steam / PS5', null, this)"
+                                class="bg-purple-600 hover:bg-purple-500 text-white px-3.5 py-2.5 rounded-xl font-bold text-xs flex items-center gap-2 shadow-md shadow-purple-600/30 transition transform active:scale-90"
+                            >
+                                <i class="fa-solid fa-cart-plus"></i>
+                                <span>Añadir</span>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- JUEGO 7: Call of Duty: Ghosts Classic -->
+                <article class="game-card bg-gray-900/90 rounded-2xl overflow-hidden border border-gray-800 hover:border-purple-500/60 shadow-lg hover:shadow-2xl hover:shadow-purple-950/40 transition duration-300 flex flex-col group" data-platform="PS5 Xbox PC" data-genre="Acción" data-name="Call of Duty: Ghosts" data-price="19.99">
+                    <div class="relative overflow-hidden aspect-[3/4] bg-gray-950">
+                        <span class="absolute top-3 left-3 z-10 bg-red-600 text-white text-[11px] font-black uppercase px-2.5 py-1 rounded-md shadow">
+                            -50% RETRO
+                        </span>
+                        <button onclick="toggleWishlistBtn('Call of Duty: Ghosts', this)" class="wishlist-toggle-btn absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-gray-950/70 hover:bg-pink-600 text-gray-300 hover:text-white flex items-center justify-center transition">
+                            <i class="fa-regular fa-heart text-sm"></i>
+                        </button>
+                        <img src="images/call2.png" alt="Call of Duty: Ghosts" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-gray-950 via-transparent to-transparent opacity-60"></div>
+
+                        <div class="absolute inset-0 bg-gray-950/60 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center p-4">
+                            <button onclick="openQuickView('Call of Duty: Ghosts', 19.99, 'images/call2.png', 'PS5 / Xbox Series / PC', 'Acción Bélica', 4.2, 'Revive la legendaria campaña de los Ghosts y el aclamado modo Extinción extraterrestre.', 39.99)" class="bg-gray-900/90 hover:bg-purple-600 text-white px-4 py-2 rounded-xl text-xs font-bold border border-gray-700 transition flex items-center gap-2">
+                                <i class="fa-solid fa-eye"></i> Vista Rápida
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="p-5 flex flex-col flex-grow justify-between space-y-4">
+                        <div>
+                            <div class="flex items-center justify-between text-xs text-gray-400 mb-1.5">
+                                <span class="text-purple-400 font-bold uppercase tracking-wider text-[11px]">Multiplataforma</span>
+                                <span class="flex items-center gap-1 text-yellow-400 font-semibold"><i class="fa-solid fa-star text-[11px]"></i> 4.2</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-white group-hover:text-purple-400 transition line-clamp-1">Call of Duty: Ghosts</h3>
+                            <p class="text-xs text-gray-400 mt-1 line-clamp-2">Una fuerza de operaciones especiales clandestina lucha contra una superpotencia emergente.</p>
+                        </div>
+
+                        <div class="pt-3 border-t border-gray-800/80 flex items-center justify-between">
+                            <div>
+                                <span class="text-2xl font-black text-purple-400 font-display">$19.99</span>
+                                <span class="text-xs text-gray-500 line-through block">$39.99</span>
+                            </div>
+                            <button 
+                                onclick="addGameToCart('Call of Duty: Ghosts', 19.99, 'images/call2.png', 'PS5 / Xbox Series / PC', 39.99, this)"
+                                class="bg-purple-600 hover:bg-purple-500 text-white px-3.5 py-2.5 rounded-xl font-bold text-xs flex items-center gap-2 shadow-md shadow-purple-600/30 transition transform active:scale-90"
+                            >
+                                <i class="fa-solid fa-cart-plus"></i>
+                                <span>Añadir</span>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+
+            <!-- Botón Ver Todo el Catálogo -->
+            <div class="text-center mt-12">
+                <a href="pages/catalogo.html" class="inline-flex items-center gap-3 bg-gray-900 hover:bg-purple-600/20 text-purple-300 hover:text-white border border-purple-500/40 hover:border-purple-500 px-8 py-3.5 rounded-2xl font-bold text-sm transition transform hover:-translate-y-0.5">
+                    <span>Explorar Todos los 50+ Juegos Disponibles</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+
+        </section>
+
+        <!-- ==========================================
+             POR QUÉ ELEGIR PIXELAREK (BENEFICIOS)
+             ========================================== -->
+        <section class="bg-gray-950/60 border-y border-gray-800/60 py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-2xl mx-auto mb-12">
+                    <span class="text-cyan-400 text-xs font-black uppercase tracking-widest block mb-2">SEGURIDAD & CONFIANZA</span>
+                    <h2 class="text-3xl font-black text-white font-display">LA MEJOR EXPERIENCIA DE COMPRA GAMER</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    
+                    <div class="bg-gray-900/80 border border-gray-800 p-6 rounded-2xl hover:border-purple-500/40 transition">
+                        <div class="w-12 h-12 rounded-xl bg-purple-600/20 border border-purple-500/30 flex items-center justify-center text-purple-400 text-xl mb-4">
+                            <i class="fa-solid fa-key"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">Claves 100% Oficiales</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed">Trabajamos directamente con distribuidores autorizados de Steam, PSN, Xbox y Nintendo.</p>
+                    </div>
+
+                    <div class="bg-gray-900/80 border border-gray-800 p-6 rounded-2xl hover:border-cyan-500/40 transition">
+                        <div class="w-12 h-12 rounded-xl bg-cyan-600/20 border border-cyan-500/30 flex items-center justify-center text-cyan-400 text-xl mb-4">
+                            <i class="fa-solid fa-bolt"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">Entrega Inmediata</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed">Tu código de activación aparece al instante en pantalla y se envía a tu correo en menos de 30 segundos.</p>
+                    </div>
+
+                    <div class="bg-gray-900/80 border border-gray-800 p-6 rounded-2xl hover:border-emerald-500/40 transition">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-600/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-xl mb-4">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">Garantía de Activación</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed">Si tu clave presenta algún inconveniente, la reemplazamos inmediatamente o devolvemos tu dinero.</p>
+                    </div>
+
+                    <div class="bg-gray-900/80 border border-gray-800 p-6 rounded-2xl hover:border-pink-500/40 transition">
+                        <div class="w-12 h-12 rounded-xl bg-pink-600/20 border border-pink-500/30 flex items-center justify-center text-pink-400 text-xl mb-4">
+                            <i class="fa-brands fa-discord"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">Soporte Gamer 24/7</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed">Atención experta en vivo por chat y servidor de Discord para resolver cualquier duda al momento.</p>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ==========================================
+             BANNER NEWSLETTER / CLUB GAMER
+             ========================================== -->
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="relative rounded-3xl overflow-hidden bg-gradient-to-r from-purple-900 via-indigo-950 to-gray-950 border border-purple-500/30 p-8 sm:p-12 shadow-2xl">
+                <div class="max-w-2xl relative z-10 space-y-4">
+                    <span class="bg-purple-600 text-white text-[11px] font-black uppercase px-3 py-1 rounded-full tracking-wider">
+                        ÚNETE AL CLUB PIXEL
+                    </span>
+                    <h2 class="text-3xl sm:text-4xl font-black text-white font-display">
+                        Consigue $10 USD de Descuento en tu Primera Orden
+                    </h2>
+                    <p class="text-sm text-gray-300">
+                        Suscríbete para recibir códigos exclusivos, sorteos mensuales de juegos AAA y avisos instantáneos de rebajas de Steam y PlayStation.
+                    </p>
+                    <form onsubmit="handleNewsletter(event)" class="flex flex-col sm:flex-row gap-3 pt-2">
+                        <input 
+                            type="email" 
+                            id="newsletter-email" 
+                            placeholder="Introduce tu correo gamer..." 
+                            required
+                            class="bg-gray-900/90 border border-gray-700 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-400 focus:outline-none focus:border-purple-400 flex-1"
+                        >
+                        <button type="submit" class="bg-purple-600 hover:bg-purple-500 text-white font-bold px-6 py-3 rounded-xl text-sm transition shadow-lg shadow-purple-600/30 whitespace-nowrap">
+                            Reclamar Cupón
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ==========================================
+             MINI-CARRITO LATERAL (DRAWER SLIDE-OVER)
+             ========================================== -->
+    <div id="cart-drawer-overlay" onclick="closeCartDrawer()" class="drawer-overlay fixed inset-0 bg-black/70 backdrop-blur-sm z-50"></div>
+    
+    <aside id="cart-drawer" class="drawer-content fixed top-0 right-0 bottom-0 w-full max-w-md bg-gray-900 border-l border-gray-800 z-50 flex flex-col shadow-2xl">
+        
+        <!-- Header del Drawer -->
+        <div class="p-5 border-b border-gray-800 flex items-center justify-between bg-gray-950/50">
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-cart-shopping text-purple-400 text-lg"></i>
+                <h3 class="text-lg font-bold text-white">Tu Carrito de Compra</h3>
+                <span id="drawer-items-count" class="bg-purple-600/30 text-purple-300 text-xs font-bold px-2 py-0.5 rounded-full border border-purple-500/30">0</span>
+            </div>
+            <button onclick="closeCartDrawer()" class="text-gray-400 hover:text-white p-1 text-lg">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <!-- Lista de Productos en el Drawer -->
+        <div id="drawer-cart-list" class="flex-1 overflow-y-auto p-5 space-y-4">
+            <!-- Renderizado dinámico -->
+        </div>
+
+        <!-- Footer / Checkout en el Drawer -->
+        <div class="p-5 border-t border-gray-800 bg-gray-950/70 space-y-4">
+            
+            <div class="space-y-1.5 text-sm">
+                <div class="flex justify-between text-gray-400">
+                    <span>Subtotal:</span>
+                    <strong id="drawer-subtotal" class="text-white">$0.00</strong>
+                </div>
+                <div id="drawer-discount-row" class="hidden flex justify-between text-emerald-400">
+                    <span>Descuento aplicado:</span>
+                    <strong id="drawer-discount">-$0.00</strong>
+                </div>
+                <div class="flex justify-between text-base font-bold text-white pt-2 border-t border-gray-800">
+                    <span>Total estimado:</span>
+                    <strong id="drawer-total" class="text-purple-400 text-xl font-display">$0.00</strong>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+                <a href="pages/carrito.html" class="bg-gray-800 hover:bg-gray-700 text-white font-bold py-3 rounded-xl text-center text-xs transition border border-gray-700 flex items-center justify-center gap-1.5">
+                    <i class="fa-solid fa-eye"></i> Ver Carrito
+                </a>
+                <a href="pages/carrito.html?checkout=open" class="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold py-3 rounded-xl text-center text-xs transition shadow-lg shadow-purple-600/30 flex items-center justify-center gap-1.5">
+                    <i class="fa-solid fa-lock"></i> Pagar Ahora
+                </a>
+            </div>
+
+            <p class="text-[11px] text-gray-400 text-center flex items-center justify-center gap-1">
+                <i class="fa-solid fa-shield-cat text-cyan-400"></i> Claves digitales 100% cifradas y oficiales.
+            </p>
+
+        </div>
+
+    </aside>
+
+    <!-- ==========================================
+             MODAL DE VISTA RÁPIDA (QUICK VIEW)
+             ========================================== -->
+    <div id="quick-view-modal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="bg-gray-900 border border-gray-700 rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl relative animate-scaleUp">
+            
+            <button onclick="closeQuickView()" class="absolute top-4 right-4 z-20 w-8 h-8 rounded-full bg-gray-950/80 hover:bg-red-600 text-gray-300 hover:text-white flex items-center justify-center transition">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2">
+                <div class="relative bg-gray-950 h-72 sm:h-full">
+                    <img id="qv-img" src="" alt="Cover" class="w-full h-full object-cover">
+                </div>
+                <div class="p-6 sm:p-8 flex flex-col justify-between space-y-4">
+                    <div>
+                        <span id="qv-platform" class="text-xs font-bold text-purple-400 uppercase tracking-wider block mb-1"></span>
+                        <h3 id="qv-title" class="text-2xl font-black text-white font-display"></h3>
+                        <div class="flex items-center gap-2 mt-2">
+                            <div id="qv-stars" class="text-yellow-400 text-xs flex gap-0.5"></div>
+                            <span id="qv-rating" class="text-xs text-gray-400 font-semibold"></span>
+                            <span id="qv-genre" class="ml-2 text-xs bg-gray-800 text-gray-300 px-2 py-0.5 rounded"></span>
+                        </div>
+                        <p id="qv-desc" class="text-xs text-gray-300 mt-4 leading-relaxed"></p>
+                    </div>
+
+                    <div class="pt-4 border-t border-gray-800 space-y-4">
+                        <div class="flex items-baseline gap-3">
+                            <span id="qv-price" class="text-3xl font-black text-white font-display"></span>
+                            <span id="qv-orig-price" class="text-sm text-gray-500 line-through"></span>
+                        </div>
+
+                        <div class="flex gap-3">
+                            <button id="qv-add-btn" class="flex-1 bg-purple-600 hover:bg-purple-500 text-white font-bold py-3 rounded-xl text-xs transition flex items-center justify-center gap-2 shadow-lg shadow-purple-600/30">
+                                <i class="fa-solid fa-cart-plus"></i> Añadir al Carrito
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ==========================================
+             MODAL DE TRÁILER CINEMATOGRÁFICO
+             ========================================== -->
+    <div id="trailer-modal" class="hidden fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="bg-gray-900 border border-gray-700 rounded-3xl max-w-3xl w-full overflow-hidden shadow-2xl relative">
+            <div class="p-4 border-b border-gray-800 flex items-center justify-between bg-gray-950">
+                <h4 id="trailer-title" class="font-bold text-white text-base flex items-center gap-2">
+                    <i class="fa-solid fa-clapperboard text-purple-400"></i> Tráiler Oficial
+                </h4>
+                <button onclick="closeTrailerModal()" class="text-gray-400 hover:text-white p-1 text-lg">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            
+            <!-- Video Mock Player -->
+            <div class="relative aspect-video bg-black flex items-center justify-center overflow-hidden group">
+                <img src="images/hero_banner.jpg" alt="Trailer Thumbnail" class="absolute inset-0 w-full h-full object-cover opacity-60">
+                <div class="relative z-10 text-center p-6 space-y-4">
+                    <div class="w-16 h-16 rounded-full bg-purple-600/80 hover:bg-purple-500 text-white flex items-center justify-center mx-auto cursor-pointer shadow-xl shadow-purple-600/40 hover:scale-110 transition">
+                        <i class="fa-solid fa-play text-2xl ml-1"></i>
+                    </div>
+                    <p id="trailer-desc" class="text-sm text-gray-200 max-w-lg mx-auto bg-black/60 p-3 rounded-xl backdrop-blur-sm"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+             FOOTER PROFESIONAL
+             ========================================== -->
+    <footer class="bg-gray-950 border-t border-gray-800/80 text-gray-400 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
+                
+                <!-- Columna 1: Marca -->
+                <div class="lg:col-span-2 space-y-4">
+                    <a href="index.html" class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-xl bg-purple-600 flex items-center justify-center text-white text-lg">
+                            <i class="fa-solid fa-gamepad"></i>
+                        </div>
+                        <span class="text-2xl font-black font-display text-white">PIXEL<span class="text-purple-400">AREK</span></span>
+                    </a>
+                    <p class="text-xs text-gray-400 max-w-sm leading-relaxed">
+                        Tu plataforma de confianza para la compra y activación instantánea de videojuegos originales, claves digitales oficiales y tarjetas prepago al precio más competitivo del mercado.
+                    </p>
+                    <div class="flex items-center gap-3 text-lg pt-2">
+                        <a href="#" class="w-9 h-9 rounded-lg bg-gray-900 hover:bg-purple-600 hover:text-white flex items-center justify-center transition border border-gray-800"><i class="fa-brands fa-discord"></i></a>
+                        <a href="#" class="w-9 h-9 rounded-lg bg-gray-900 hover:bg-purple-600 hover:text-white flex items-center justify-center transition border border-gray-800"><i class="fa-brands fa-twitch"></i></a>
+                        <a href="#" class="w-9 h-9 rounded-lg bg-gray-900 hover:bg-purple-600 hover:text-white flex items-center justify-center transition border border-gray-800"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="#" class="w-9 h-9 rounded-lg bg-gray-900 hover:bg-purple-600 hover:text-white flex items-center justify-center transition border border-gray-800"><i class="fa-brands fa-x-twitter"></i></a>
+                    </div>
+                </div>
+
+                <!-- Columna 2: Plataformas -->
+                <div>
+                    <h4 class="text-white font-bold text-sm mb-4">Plataformas</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="pages/catalogo.html" class="hover:text-purple-400 transition">PlayStation 5 (PSN)</a></li>
+                        <li><a href="pages/catalogo.html" class="hover:text-purple-400 transition">Xbox Series X|S</a></li>
+                        <li><a href="pages/catalogo.html" class="hover:text-purple-400 transition">Nintendo Switch eShop</a></li>
+                        <li><a href="pages/catalogo.html" class="hover:text-purple-400 transition">PC (Steam / Epic Games)</a></li>
+                    </ul>
+                </div>
+
+                <!-- Columna 3: Enlaces Rápidos -->
+                <div>
+                    <h4 class="text-white font-bold text-sm mb-4">PixelArek</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="pages/catalogo.html" class="hover:text-purple-400 transition">Catálogo Completo</a></li>
+                        <li><a href="pages/ofertas.html" class="hover:text-purple-400 transition">Ofertas y Descuentos</a></li>
+                        <li><a href="pages/carrito.html" class="hover:text-purple-400 transition">Carrito de Compra</a></li>
+                        <li><a href="pages/perfil.html" class="hover:text-purple-400 transition">Mi Cuenta & Pedidos</a></li>
+                    </ul>
+                </div>
+
+                <!-- Columna 4: Medios de Pago -->
+                <div>
+                    <h4 class="text-white font-bold text-sm mb-4">Pagos Cifrados</h4>
+                    <p class="text-xs text-gray-400 mb-3">Transacciones 100% protegidas con cifrado SSL 256-bit.</p>
+                    <div class="flex flex-wrap gap-2 text-xl text-gray-300">
+                        <i class="fa-brands fa-cc-visa hover:text-blue-400"></i>
+                        <i class="fa-brands fa-cc-mastercard hover:text-red-400"></i>
+                        <i class="fa-brands fa-cc-paypal hover:text-blue-500"></i>
+                        <i class="fa-brands fa-bitcoin hover:text-yellow-400"></i>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="border-t border-gray-900 pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500 gap-4">
+                <p>&copy; 2026 PixelArek Video Game Store. Todos los derechos reservados.</p>
+                <div class="flex gap-4">
+                    <a href="#" class="hover:text-gray-300">Términos del Servicio</a>
+                    <a href="#" class="hover:text-gray-300">Política de Privacidad</a>
+                    <a href="#" class="hover:text-gray-300">Garantía de Devolución</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts: Cart Store & Home Logic -->
+    <script src="js/cart-store.js"></script>
+    <script>
+        // ==========================================
+        // LÓGICA DE LA PÁGINA PRINCIPAL
+        // ==========================================
+
+        // Añadir juego al carrito con animación de vuelo
+        function addGameToCart(name, price, image, platform, origPrice, btnEl) {
+            const card = btnEl ? btnEl.closest('.game-card') || btnEl.closest('div') : null;
+            const imgEl = card ? card.querySelector('img') : null;
+
+            PixelCart.addItem({
+                name,
+                price,
+                originalPrice: origPrice,
+                platform,
+                image
+            });
+
+            if (imgEl) {
+                PixelCart.flyToCart(image, imgEl);
+            }
+
+            PixelCart.showToast(`<strong>${name}</strong> añadido a tu carrito`, 'success');
+            renderDrawerCart();
+        }
+
+        // Drawer Controls
+        function openCartDrawer() {
+            renderDrawerCart();
+            document.getElementById('cart-drawer-overlay').classList.add('active');
+            document.getElementById('cart-drawer').classList.add('active');
+        }
+
+        function closeCartDrawer() {
+            document.getElementById('cart-drawer-overlay').classList.remove('active');
+            document.getElementById('cart-drawer').classList.remove('active');
+        }
+
+        // Renderizar elementos del mini drawer
+        function renderDrawerCart() {
+            const cart = PixelCart.getCart();
+            const totals = PixelCart.getTotals();
+            const listEl = document.getElementById('drawer-cart-list');
+            const itemsCountEl = document.getElementById('drawer-items-count');
+            const subtotalEl = document.getElementById('drawer-subtotal');
+            const discountRow = document.getElementById('drawer-discount-row');
+            const discountEl = document.getElementById('drawer-discount');
+            const totalEl = document.getElementById('drawer-total');
+
+            if (!listEl) return;
+
+            itemsCountEl.textContent = totals.count;
+            subtotalEl.textContent = totals.formattedSubtotal;
+            totalEl.textContent = totals.formattedTotal;
+
+            if (totals.discount > 0) {
+                discountRow.classList.remove('hidden');
+                discountEl.textContent = '-' + totals.formattedDiscount;
+            } else {
+                discountRow.classList.add('hidden');
+            }
+
+            if (cart.length === 0) {
+                listEl.innerHTML = `
+                    <div class="h-full flex flex-col items-center justify-center text-center p-6 text-gray-400 space-y-3">
+                        <div class="w-16 h-16 rounded-2xl bg-gray-800 flex items-center justify-center text-gray-500 text-2xl">
+                            <i class="fa-solid fa-gamepad"></i>
+                        </div>
+                        <h4 class="text-white font-bold">Tu carrito está vacío</h4>
+                        <p class="text-xs">¡Agrega tus videojuegos favoritos y comienza la aventura!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            listEl.innerHTML = cart.map(item => `
+                <div class="flex items-center gap-3 bg-gray-950/60 p-3 rounded-xl border border-gray-800/80">
+                    <img src="${item.image}" alt="${item.name}" class="w-14 h-16 object-cover rounded-lg">
+                    <div class="flex-1 min-w-0">
+                        <span class="text-[10px] text-purple-400 font-bold uppercase tracking-wider block truncate">${item.platform || 'Multiplataforma'}</span>
+                        <h5 class="text-sm font-bold text-white truncate">${item.name}</h5>
+                        <span class="text-xs text-purple-300 font-bold">${PixelCart.formatPrice(item.price)}</span>
+                    </div>
+                    <div class="flex items-center gap-1.5 bg-gray-900 border border-gray-700 rounded-lg p-1">
+                        <button onclick="PixelCart.updateQty('${item.name}', -1); renderDrawerCart();" class="w-5 h-5 flex items-center justify-center text-xs text-gray-300 hover:text-white bg-gray-800 rounded">-</button>
+                        <span class="text-xs font-bold w-4 text-center text-white">${item.qty}</span>
+                        <button onclick="PixelCart.updateQty('${item.name}', 1); renderDrawerCart();" class="w-5 h-5 flex items-center justify-center text-xs text-gray-300 hover:text-white bg-gray-800 rounded">+</button>
+                    </div>
+                    <button onclick="PixelCart.removeItem('${item.name}'); renderDrawerCart();" class="text-gray-500 hover:text-red-400 p-1 text-xs" title="Eliminar">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        // Filtro de catálogo por plataforma
+        function filterCatalog(platform, btnEl) {
+            document.querySelectorAll('#platform-tabs .tab-btn').forEach(btn => {
+                btn.className = 'tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-gray-900 hover:bg-gray-800 text-gray-300 border border-gray-800 transition flex items-center gap-1.5';
+            });
+            btnEl.className = 'tab-btn active px-4 py-2 rounded-xl text-xs font-bold bg-purple-600 text-white shadow-md shadow-purple-600/30 transition flex items-center gap-1.5';
+
+            const cards = document.querySelectorAll('#games-grid .game-card');
+            cards.forEach(card => {
+                const cardPlatform = card.dataset.platform || '';
+                if (platform === 'all' || cardPlatform.includes(platform)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Buscador interactivo en vivo
+        const searchInput = document.getElementById('header-search-input');
+        const searchDropdown = document.getElementById('search-results-dropdown');
+        const clearSearchBtn = document.getElementById('clear-search-btn');
+
+        if (searchInput) {
+            searchInput.addEventListener('input', (e) => {
+                const query = e.target.value.toLowerCase().trim();
+                if (query.length > 0) {
+                    clearSearchBtn.classList.remove('hidden');
+                    const cards = Array.from(document.querySelectorAll('#games-grid .game-card'));
+                    const matches = cards.filter(card => {
+                        const name = card.dataset.name.toLowerCase();
+                        const plat = (card.dataset.platform || '').toLowerCase();
+                        return name.includes(query) || plat.includes(query);
+                    });
+
+                    if (matches.length > 0) {
+                        searchDropdown.classList.remove('hidden');
+                        searchDropdown.innerHTML = matches.slice(0, 4).map(card => {
+                            const name = card.dataset.name;
+                            const price = card.dataset.price;
+                            const img = card.querySelector('img').src;
+                            return `
+                                <div onclick="openQuickViewFromSearch('${name}')" class="flex items-center gap-3 p-2 hover:bg-gray-800/80 rounded-lg cursor-pointer transition">
+                                    <img src="${img}" class="w-10 h-12 object-cover rounded">
+                                    <div class="flex-1 min-w-0">
+                                        <p class="text-xs font-bold text-white truncate">${name}</p>
+                                        <p class="text-[11px] text-purple-400 font-bold">$${price}</p>
+                                    </div>
+                                    <span class="text-[10px] text-gray-500 bg-gray-800 px-2 py-0.5 rounded">Ver</span>
+                                </div>
+                            `;
+                        }).join('');
+                    } else {
+                        searchDropdown.classList.remove('hidden');
+                        searchDropdown.innerHTML = `<p class="p-3 text-xs text-gray-400 text-center">No se encontraron juegos para "${query}"</p>`;
+                    }
+                } else {
+                    clearSearchBtn.classList.add('hidden');
+                    searchDropdown.classList.add('hidden');
+                }
+            });
+
+            clearSearchBtn.addEventListener('click', () => {
+                searchInput.value = '';
+                clearSearchBtn.classList.add('hidden');
+                searchDropdown.classList.add('hidden');
+            });
+        }
+
+        function openQuickViewFromSearch(name) {
+            const card = Array.from(document.querySelectorAll('#games-grid .game-card')).find(c => c.dataset.name === name);
+            if (card) {
+                const btn = card.querySelector('.group-hover\\:opacity-100 button') || card.querySelector('button');
+                btn.click();
+            }
+            searchDropdown.classList.add('hidden');
+        }
+
+        // Modal de Vista Rápida
+        function openQuickView(name, price, image, platform, genre, rating, desc, origPrice) {
+            document.getElementById('qv-img').src = image;
+            document.getElementById('qv-title').textContent = name;
+            document.getElementById('qv-platform').textContent = platform;
+            document.getElementById('qv-genre').textContent = genre;
+            document.getElementById('qv-rating').textContent = `(${rating} / 5.0)`;
+            document.getElementById('qv-desc').textContent = desc;
+            document.getElementById('qv-price').textContent = PixelCart.formatPrice(price);
+            
+            const origEl = document.getElementById('qv-orig-price');
+            if (origPrice) {
+                origEl.textContent = PixelCart.formatPrice(origPrice);
+                origEl.classList.remove('hidden');
+            } else {
+                origEl.classList.add('hidden');
+            }
+
+            const starsEl = document.getElementById('qv-stars');
+            starsEl.innerHTML = Array(5).fill('<i class="fa-solid fa-star"></i>').join('');
+
+            const addBtn = document.getElementById('qv-add-btn');
+            addBtn.onclick = () => {
+                PixelCart.addItem({ name, price, originalPrice: origPrice, platform, image });
+                PixelCart.showToast(`¡${name} añadido con éxito!`);
+                closeQuickView();
+                openCartDrawer();
+            };
+
+            document.getElementById('quick-view-modal').classList.remove('hidden');
+        }
+
+        function closeQuickView() {
+            document.getElementById('quick-view-modal').classList.add('hidden');
+        }
+
+        // Tráiler Modal
+        function openTrailerModal(title, desc) {
+            document.getElementById('trailer-title').innerHTML = `<i class="fa-solid fa-clapperboard text-purple-400"></i> ${title} - Tráiler Oficial`;
+            document.getElementById('trailer-desc').textContent = desc;
+            document.getElementById('trailer-modal').classList.remove('hidden');
+        }
+
+        function closeTrailerModal() {
+            document.getElementById('trailer-modal').classList.add('hidden');
+        }
+
+        // Wishlist
+        function toggleWishlistBtn(name, btnEl) {
+            const added = PixelCart.toggleWishlist(name);
+            const icon = btnEl.querySelector('i');
+            if (added) {
+                icon.className = 'fa-solid fa-heart text-pink-500';
+                PixelCart.showToast(`"${name}" guardado en tu Lista de Deseos ❤️`, 'info');
+            } else {
+                icon.className = 'fa-regular fa-heart text-sm';
+                PixelCart.showToast(`"${name}" eliminado de tu Lista de Deseos`, 'info');
+            }
+            updateWishlistBadge();
+        }
+
+        function updateWishlistBadge() {
+            const list = PixelCart.getWishlist();
+            const badge = document.getElementById('wishlist-badge');
+            if (badge) badge.textContent = list.length;
+        }
+
+        function showWishlistModal() {
+            const list = PixelCart.getWishlist();
+            if (list.length === 0) {
+                PixelCart.showToast('Tu lista de deseos está vacía. ¡Marca los juegos con el corazón!', 'info');
+            } else {
+                PixelCart.showToast(`Tienes ${list.length} juego(s) en deseos: ${list.join(', ')}`, 'info');
+            }
+        }
+
+        // Newsletter
+        function handleNewsletter(e) {
+            e.preventDefault();
+            const email = document.getElementById('newsletter-email').value;
+            PixelCart.applyCoupon('WELCOME');
+            PixelCart.showToast(`¡Felicidades! Se ha activado el cupón WELCOME ($10 USD de regalo). Código enviado a ${email}`, 'success');
+            document.getElementById('newsletter-email').value = '';
+        }
+
+        // Mobile Nav Toggle
+        function toggleMobileNav() {
+            const nav = document.getElementById('mobile-nav');
+            nav.classList.toggle('hidden');
+        }
+
+        // Countdown Timer
+        function initCountdown() {
+            let h = 14, m = 48, s = 22;
+            setInterval(() => {
+                s--;
+                if (s < 0) { s = 59; m--; }
+                if (m < 0) { m = 59; h--; }
+                if (h < 0) { h = 23; }
+                const hEl = document.getElementById('timer-hours');
+                const mEl = document.getElementById('timer-minutes');
+                const sEl = document.getElementById('timer-seconds');
+                if (hEl) hEl.textContent = String(h).padStart(2, '0');
+                if (mEl) mEl.textContent = String(m).padStart(2, '0');
+                if (sEl) sEl.textContent = String(s).padStart(2, '0');
+            }, 1000);
+        }
+
+        // Init
+        document.addEventListener('DOMContentLoaded', () => {
+            initCountdown();
+            updateWishlistBadge();
+            renderDrawerCart();
+        });
+    </script>
+</body>
+</html>

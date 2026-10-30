@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tu Carrito Gamer | PixelArek Video Game Store</title>
+    <meta name="description" content="Revisa tu carrito de compras de videojuegos, aplica cupones de descuento y procesa tu pago seguro con entrega digital inmediata de claves.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                        display: ['Orbitron', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        body {
+            background-color: #080c16;
+            color: #f3f4f6;
+            overflow-x: hidden;
+        }
+
+        .neon-border {
+            border: 1px solid rgba(168, 85, 247, 0.25);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .neon-border:hover {
+            border-color: rgba(168, 85, 247, 0.8);
+            box-shadow: 0 0 25px -5px rgba(168, 85, 247, 0.4);
+        }
+
+        /* Scrollbar personalizable */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b0f19;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #374151;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #8b5cf6;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in {
+            animation: fadeIn 0.3s ease-out forwards;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col font-sans selection:bg-purple-600 selection:text-white">
+
+    <!-- HEADER / NAVEGACIÓN -->
+    <header class="sticky top-0 z-40 bg-gray-950/85 backdrop-blur-md border-b border-gray-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+            
+            <!-- LOGO -->
+            <a href="../index.html" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-purple-600 to-cyan-400 p-0.5 shadow-lg shadow-purple-600/30">
+                    <div class="w-full h-full bg-gray-950 rounded-[10px] flex items-center justify-center">
+                        <i class="fa-solid fa-gamepad text-xl text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400"></i>
+                    </div>
+                </div>
+                <div>
+                    <span class="text-2xl font-black tracking-wider font-display">PIXEL<span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400">AREK</span></span>
+                </div>
+            </a>
+
+            <!-- NAVEGACIÓN -->
+            <nav class="hidden md:flex items-center gap-7 text-sm font-semibold">
+                <a href="../index.html" class="text-gray-300 hover:text-purple-400 transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-house text-xs"></i> Inicio
+                </a>
+                <a href="catalogo.html" class="text-gray-300 hover:text-purple-400 transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-border-all text-xs"></i> Catálogo
+                </a>
+                <a href="ofertas.html" class="text-gray-300 hover:text-red-400 transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-fire text-red-500 text-xs"></i> Ofertas
+                </a>
+                <a href="carrito.html" class="text-purple-400 font-bold border-b-2 border-purple-500 pb-1 flex items-center gap-1.5">
+                    <i class="fa-solid fa-cart-shopping text-xs"></i> Mi Carrito
+                </a>
+            </nav>
+
+            <!-- CONTADOR ACTIVO -->
+            <div class="flex items-center gap-3">
+                <span class="text-xs text-gray-400 hidden sm:inline">Tu Carrito:</span>
+                <span class="bg-purple-600/20 border border-purple-500/40 text-purple-300 text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-2">
+                    <i class="fa-solid fa-gamepad text-purple-400"></i>
+                    <span id="header-items-label">0 Juegos</span>
+                </span>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL DEL CARRITO -->
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full">
+        
+        <!-- Breadcrumbs & Encabezado -->
+        <div class="mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+                <div class="flex items-center gap-2 text-xs text-gray-400 mb-2">
+                    <a href="../index.html" class="hover:text-purple-400">Inicio</a>
+                    <span>/</span>
+                    <a href="catalogo.html" class="hover:text-purple-400">Catálogo</a>
+                    <span>/</span>
+                    <span class="text-purple-400">Carrito de compras</span>
+                </div>
+                <h1 class="text-3xl sm:text-4xl font-black text-white font-display flex items-center gap-3">
+                    <i class="fa-solid fa-cart-shopping text-purple-500"></i> Mi Carrito Gamer
+                </h1>
+            </div>
+
+            <!-- Botón Vaciar / Seguir Comprando -->
+            <div id="cart-actions-bar" class="hidden flex items-center gap-3">
+                <a href="catalogo.html" class="bg-gray-900 hover:bg-gray-800 text-gray-300 hover:text-white px-4 py-2 rounded-xl text-xs font-bold border border-gray-700 transition flex items-center gap-2">
+                    <i class="fa-solid fa-plus"></i> Añadir más juegos
+                </a>
+                <button onclick="confirmClearCart()" class="bg-gray-900 hover:bg-red-950/40 text-gray-400 hover:text-red-400 px-4 py-2 rounded-xl text-xs font-bold border border-gray-800 hover:border-red-500/30 transition flex items-center gap-2">
+                    <i class="fa-solid fa-trash-can"></i> Vaciar Carrito
+                </button>
+            </div>
+        </div>
+
+        <!-- CONTENEDOR PRINCIPAL: 2 COLUMNAS (ITEMS + RESUMEN) -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            
+            <!-- COLUMNA IZQUIERDA: LISTA DE PRODUCTOS O ESTADO VACÍO -->
+            <div class="lg:col-span-8 space-y-4">
+                
+                <!-- Contenedor dinámico de items -->
+                <div id="cart-items-container" class="space-y-4">
+                    <!-- Renderizado dinámico desde JS -->
+                </div>
+
+                <!-- ESTADO VACÍO (Si no hay items) -->
+                <div id="empty-cart-state" class="hidden bg-gray-900/60 border border-gray-800 rounded-3xl p-12 text-center space-y-6">
+                    <div class="w-24 h-24 mx-auto rounded-3xl bg-purple-600/10 border border-purple-500/20 flex items-center justify-center text-purple-400 text-4xl animate-bounce">
+                        <i class="fa-solid fa-gamepad"></i>
+                    </div>
+                    <div class="max-w-md mx-auto space-y-2">
+                        <h3 class="text-2xl font-black text-white font-display">Tu carrito gamer está vacío</h3>
+                        <p class="text-sm text-gray-400 leading-relaxed">
+                            No tienes ningún videojuego en tu orden por ahora. ¡Descubre los lanzamientos más esperados y las ofertas flash con hasta 50% de descuento!
+                        </p>
+                    </div>
+                    <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
+                        <a href="catalogo.html" class="bg-purple-600 hover:bg-purple-500 text-white font-bold px-6 py-3.5 rounded-xl text-sm transition shadow-lg shadow-purple-600/30 flex items-center gap-2">
+                            <i class="fa-solid fa-border-all"></i> Explorar Catálogo
+                        </a>
+                        <a href="ofertas.html" class="bg-gray-900 hover:bg-gray-800 text-red-400 hover:text-red-300 font-bold px-6 py-3.5 rounded-xl text-sm border border-red-500/30 transition flex items-center gap-2">
+                            <i class="fa-solid fa-fire"></i> Ver Rebajas Destacadas
+                        </a>
+                    </div>
+                </div>
+
+                <!-- SECCIÓN CROSS-SELL: "GAMERS TAMBIÉN LLEVARON" -->
+                <div class="bg-gray-900/40 border border-gray-800 rounded-3xl p-6 mt-8">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-sm font-bold uppercase tracking-wider text-purple-400 flex items-center gap-2">
+                            <i class="fa-solid fa-sparkles text-yellow-400"></i> Complementos Gamer Populares
+                        </h3>
+                        <span class="text-xs text-gray-500">Añade con 1-click</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        
+                        <!-- Complemento 1 -->
+                        <div class="bg-gray-950/70 border border-gray-800/80 p-3.5 rounded-2xl flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-xl bg-purple-900/40 flex items-center justify-center text-purple-300 text-lg flex-shrink-0">
+                                <i class="fa-solid fa-shield-halved"></i>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <h4 class="text-xs font-bold text-white truncate">Pase de Batalla BO6</h4>
+                                <span class="text-xs text-purple-400 font-black">$9.99</span>
+                            </div>
+                            <button onclick="addAddon('Pase de Batalla BO6', 9.99, '../images/call.png', 'Multiplataforma')" class="w-8 h-8 rounded-lg bg-purple-600 hover:bg-purple-500 text-white flex items-center justify-center text-xs transition" title="Añadir a la orden">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </div>
+
+                        <!-- Complemento 2 -->
+                        <div class="bg-gray-950/70 border border-gray-800/80 p-3.5 rounded-2xl flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-xl bg-emerald-900/40 flex items-center justify-center text-emerald-300 text-lg flex-shrink-0">
+                                <i class="fa-solid fa-coins"></i>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <h4 class="text-xs font-bold text-white truncate">1050 FC Points FC26</h4>
+                                <span class="text-xs text-emerald-400 font-black">$9.99</span>
+                            </div>
+                            <button onclick="addAddon('1050 FC Points FC26', 9.99, '../images/fifa.png', 'PS5 / Xbox / PC')" class="w-8 h-8 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white flex items-center justify-center text-xs transition" title="Añadir a la orden">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </div>
+
+                        <!-- Complemento 3 -->
+                        <div class="bg-gray-950/70 border border-gray-800/80 p-3.5 rounded-2xl flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-xl bg-blue-900/40 flex items-center justify-center text-blue-300 text-lg flex-shrink-0">
+                                <i class="fa-brands fa-playstation"></i>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <h4 class="text-xs font-bold text-white truncate">PS Plus Extra 3 Meses</h4>
+                                <span class="text-xs text-blue-400 font-black">$34.99</span>
+                            </div>
+                            <button onclick="addAddon('PS Plus Extra 3 Meses', 34.99, '../images/hero_banner.jpg', 'PlayStation 5')" class="w-8 h-8 rounded-lg bg-blue-600 hover:bg-blue-500 text-white flex items-center justify-center text-xs transition" title="Añadir a la orden">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- COLUMNA DERECHA: RESUMEN DE ORDEN & PAGO (STICKY) -->
+            <div class="lg:col-span-4 sticky top-28 space-y-6">
+                
+                <div class="bg-gray-900/90 border border-gray-800 rounded-3xl p-6 shadow-2xl relative overflow-hidden">
+                    <div class="absolute -right-16 -top-16 w-32 h-32 bg-purple-600/10 rounded-full blur-2xl"></div>
+
+                    <h2 class="text-xl font-black text-white font-display mb-6 pb-4 border-b border-gray-800 flex items-center justify-between">
+                        <span>Resumen de la Orden</span>
+                        <i class="fa-solid fa-receipt text-purple-400 text-base"></i>
+                    </h2>
+
+                    <!-- Cupón de Descuento -->
+                    <div class="mb-6 space-y-2">
+                        <label class="text-xs font-bold uppercase tracking-wider text-gray-300 flex items-center justify-between">
+                            <span>¿Tienes un cupón gamer?</span>
+                            <span class="text-[10px] text-purple-400 font-normal">Prueba: PIXEL20</span>
+                        </label>
+                        <div class="flex gap-2">
+                            <input 
+                                type="text" 
+                                id="coupon-input" 
+                                placeholder="Ej: PIXEL20 o GAMER10" 
+                                class="bg-gray-950 border border-gray-700 rounded-xl px-3.5 py-2 text-xs text-white uppercase tracking-wider focus:outline-none focus:border-purple-500 flex-1 font-bold"
+                            >
+                            <button 
+                                onclick="applyPromoCoupon()" 
+                                class="bg-purple-600 hover:bg-purple-500 text-white font-bold px-4 py-2 rounded-xl text-xs transition whitespace-nowrap shadow-md shadow-purple-600/30"
+                            >
+                                Aplicar
+                            </button>
+                        </div>
+
+                        <!-- Cupón Aplicado Tag -->
+                        <div id="applied-coupon-tag" class="hidden bg-emerald-950/60 border border-emerald-500/40 rounded-xl p-2.5 flex items-center justify-between text-xs text-emerald-300">
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid fa-tag text-emerald-400"></i>
+                                <div>
+                                    <span id="coupon-code-label" class="font-bold">PIXEL20</span>
+                                    <span id="coupon-desc-label" class="block text-[10px] text-emerald-400/80"></span>
+                                </div>
+                            </div>
+                            <button onclick="removePromoCoupon()" class="text-gray-400 hover:text-red-400 p-1" title="Quitar cupón">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Desglose de Precios -->
+                    <div class="space-y-3 text-sm text-gray-300 pb-6 border-b border-gray-800">
+                        <div class="flex justify-between">
+                            <span class="text-gray-400">Subtotal (<span id="summary-items-count">0</span> productos):</span>
+                            <strong id="summary-subtotal" class="text-white font-semibold">$0.00</strong>
+                        </div>
+
+                        <div id="summary-discount-row" class="hidden flex justify-between text-emerald-400">
+                            <span class="flex items-center gap-1.5"><i class="fa-solid fa-tag text-xs"></i> Descuento aplicado:</span>
+                            <strong id="summary-discount">-$0.00</strong>
+                        </div>
+
+                        <div class="flex justify-between">
+                            <span class="text-gray-400">Entrega de Claves Digitales:</span>
+                            <span class="text-cyan-400 font-bold uppercase text-xs">GRATIS (Inmediata)</span>
+                        </div>
+
+                        <div class="flex justify-between">
+                            <span class="text-gray-400">Impuestos (IVA):</span>
+                            <span class="text-gray-400">$0.00</span>
+                        </div>
+                    </div>
+
+                    <!-- Total Final -->
+                    <div class="pt-5 pb-6 flex items-baseline justify-between">
+                        <div>
+                            <span class="text-xs text-gray-400 uppercase tracking-wider block font-semibold">Total a pagar</span>
+                            <span class="text-[11px] text-gray-500">IVA incluido</span>
+                        </div>
+                        <div class="text-right">
+                            <span id="summary-total" class="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 font-display">
+                                $0.00
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Botón de Proceder al Pago -->
+                    <button 
+                        id="checkout-btn" 
+                        onclick="openCheckoutModal()" 
+                        class="w-full bg-gradient-to-r from-purple-600 via-indigo-600 to-cyan-500 hover:from-purple-500 hover:to-cyan-400 text-white font-extrabold py-4 rounded-2xl shadow-xl shadow-purple-600/40 hover:shadow-cyan-500/50 transition transform hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2 text-base"
+                    >
+                        <i class="fa-solid fa-lock"></i> Proceder al Pago Seguro
+                    </button>
+
+                    <!-- Métodos de Pago y Garantías -->
+                    <div class="mt-6 pt-6 border-t border-gray-800/80 space-y-3">
+                        <div class="flex items-center justify-center gap-4 text-xl text-gray-400">
+                            <i class="fa-brands fa-cc-visa hover:text-blue-400 transition" title="Visa"></i>
+                            <i class="fa-brands fa-cc-mastercard hover:text-red-400 transition" title="Mastercard"></i>
+                            <i class="fa-brands fa-cc-paypal hover:text-blue-500 transition" title="PayPal"></i>
+                            <i class="fa-brands fa-bitcoin hover:text-yellow-400 transition" title="Bitcoin & Cripto"></i>
+                        </div>
+                        <div class="text-center text-[11px] text-gray-400 space-y-1">
+                            <p class="flex items-center justify-center gap-1.5">
+                                <i class="fa-solid fa-shield-halved text-emerald-400"></i> Claves con garantía de activación 100%
+                            </p>
+                            <p class="flex items-center justify-center gap-1.5">
+                                <i class="fa-solid fa-envelope text-cyan-400"></i> Envío instantáneo a tu correo electrónico
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- ==========================================
+             MODAL DE CHECKOUT & PAGO SIMULADO
+             ========================================== -->
+    <div id="checkout-modal" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-gray-900 border border-gray-700 rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-2xl relative my-8">
+            
+            <button onclick="closeCheckoutModal()" class="absolute top-5 right-5 text-gray-400 hover:text-white p-2">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <!-- Encabezado del Checkout -->
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-12 h-12 rounded-2xl bg-purple-600/20 border border-purple-500/30 flex items-center justify-center text-purple-400 text-xl">
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+                <div>
+                    <h3 class="text-xl font-black text-white font-display">Pasarela de Pago Seguro</h3>
+                    <p class="text-xs text-gray-400">Cifrado de grado bancario SSL 256-bit</p>
+                </div>
+            </div>
+
+            <!-- FORMULARIO DE CHECKOUT -->
+            <form id="checkout-form" onsubmit="processPayment(event)" class="space-y-4">
+                
+                <!-- Datos del Comprador -->
+                <div class="space-y-3">
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-purple-400">1. Datos de Entrega de Claves</h4>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs text-gray-300 font-semibold mb-1">Nombre Completo *</label>
+                            <input type="text" id="buyer-name" required placeholder="Ej. Alex Mercer" class="w-full bg-gray-950 border border-gray-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-purple-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs text-gray-300 font-semibold mb-1">País *</label>
+                            <select id="buyer-country" class="w-full bg-gray-950 border border-gray-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-purple-500">
+                                <option>Ecuador</option>
+                                <option>Colombia</option>
+                                <option>México</option>
+                                <option>España</option>
+                                <option>Argentina</option>
+                                <option>Chile</option>
+                                <option>Perú</option>
+                                <option>Estados Unidos</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs text-gray-300 font-semibold mb-1">Correo Electrónico (Aquí recibirás los códigos) *</label>
+                        <input type="email" id="buyer-email" required placeholder="gamer@correo.com" class="w-full bg-gray-950 border border-gray-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-purple-500">
+                    </div>
+                </div>
+
+                <!-- Método de Pago -->
+                <div class="space-y-3 pt-2">
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-purple-400">2. Método de Pago</h4>
+                    
+                    <div class="grid grid-cols-3 gap-2">
+                        <label class="flex flex-col items-center justify-center p-3 rounded-xl border border-purple-500 bg-purple-950/30 cursor-pointer text-center text-xs font-bold text-white">
+                            <input type="radio" name="payment_method" value="card" checked class="hidden">
+                            <i class="fa-solid fa-credit-card text-purple-400 text-lg mb-1"></i>
+                            <span>Tarjeta</span>
+                        </label>
+                        <label class="flex flex-col items-center justify-center p-3 rounded-xl border border-gray-800 bg-gray-950 cursor-pointer text-center text-xs font-bold text-gray-400 hover:border-gray-700">
+                            <input type="radio" name="payment_method" value="paypal" class="hidden">
+                            <i class="fa-brands fa-paypal text-blue-400 text-lg mb-1"></i>
+                            <span>PayPal</span>
+                        </label>
+                        <label class="flex flex-col items-center justify-center p-3 rounded-xl border border-gray-800 bg-gray-950 cursor-pointer text-center text-xs font-bold text-gray-400 hover:border-gray-700">
+                            <input type="radio" name="payment_method" value="crypto" class="hidden">
+                            <i class="fa-brands fa-bitcoin text-yellow-400 text-lg mb-1"></i>
+                            <span>Cripto</span>
+                        </label>
+                    </div>
+
+                    <!-- Campos de Tarjeta -->
+                    <div id="card-fields" class="space-y-3 bg-gray-950 p-4 rounded-2xl border border-gray-800">
+                        <div>
+                            <label class="block text-xs text-gray-400 mb-1">Número de Tarjeta</label>
+                            <div class="relative">
+                                <input type="text" id="card-num" required maxlength="19" placeholder="4532 •••• •••• 8892" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-purple-500 font-mono">
+                                <i class="fa-brands fa-cc-visa absolute right-3 top-2.5 text-gray-400 text-base"></i>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-xs text-gray-400 mb-1">Expiración (MM/AA)</label>
+                                <input type="text" id="card-exp" required maxlength="5" placeholder="12/28" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-purple-500 font-mono text-center">
+                            </div>
+                            <div>
+                                <label class="block text-xs text-gray-400 mb-1">CVV / CVC</label>
+                                <input type="password" id="card-cvv" required maxlength="4" placeholder="•••" class="w-full bg-gray-900 border border-gray-700 rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-purple-500 font-mono text-center">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Resumen Total en el Modal -->
+                <div class="bg-gray-950/60 p-4 rounded-2xl border border-gray-800 flex items-center justify-between">
+                    <span class="text-xs text-gray-400">Total a debitar:</span>
+                    <strong id="modal-total-label" class="text-2xl font-black text-purple-400 font-display">$0.00</strong>
+                </div>
+
+                <!-- Botón Confirmar Compra -->
+                <button type="submit" id="submit-payment-btn" class="w-full bg-gradient-to-r from-purple-600 via-indigo-600 to-cyan-500 hover:from-purple-500 hover:to-cyan-400 text-white font-black py-4 rounded-2xl shadow-xl shadow-purple-600/40 transition flex items-center justify-center gap-2 text-sm">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <span>Confirmar y Obtener Mis Claves</span>
+                </button>
+
+            </form>
+
+            <!-- PANTALLA DE PROCESAMIENTO (SPINNER) -->
+            <div id="payment-processing" class="hidden text-center py-12 space-y-4">
+                <div class="w-16 h-16 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mx-auto"></div>
+                <h4 class="text-lg font-bold text-white font-display">Procesando pago seguro...</h4>
+                <p class="text-xs text-gray-400">Generando tus claves digitales oficiales en el servidor seguro.</p>
+            </div>
+
+            <!-- PANTALLA DE ÉXITO Y ENTREGA DE CLAVES -->
+            <div id="payment-success" class="hidden text-center space-y-6 py-4">
+                <div class="w-16 h-16 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 flex items-center justify-center text-3xl mx-auto">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+
+                <div class="space-y-1">
+                    <span class="text-xs text-emerald-400 font-bold uppercase tracking-wider">¡Transacción Exitosa!</span>
+                    <h3 class="text-2xl font-black text-white font-display">¡Gracias por tu compra!</h3>
+                    <p class="text-xs text-gray-400">Tu pedido <strong id="success-order-id" class="text-purple-400">#PX-849204</strong> ha sido procesado correctamente.</p>
+                </div>
+
+                <!-- Lista de Claves Generadas -->
+                <div class="bg-gray-950 p-4 rounded-2xl border border-gray-800 text-left space-y-3">
+                    <h5 class="text-xs font-bold text-gray-300 uppercase tracking-wider flex items-center gap-2">
+                        <i class="fa-solid fa-key text-yellow-400"></i> Tus Claves de Activación:
+                    </h5>
+                    <div id="generated-keys-list" class="space-y-2">
+                        <!-- Keys dinámicas -->
+                    </div>
+                </div>
+
+                <p class="text-xs text-gray-400">También hemos enviado una copia de tus claves e instrucciones a <strong id="success-email" class="text-white"></strong>.</p>
+
+                <div class="flex flex-col sm:flex-row gap-3 pt-2">
+                    <button onclick="downloadReceipt()" class="flex-1 bg-gray-800 hover:bg-gray-700 text-white font-bold py-3 rounded-xl text-xs transition border border-gray-700 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-file-arrow-down"></i> Descargar Comprobante
+                    </button>
+                    <a href="catalogo.html" class="flex-1 bg-purple-600 hover:bg-purple-500 text-white font-bold py-3 rounded-xl text-xs transition flex items-center justify-center gap-2 shadow-lg shadow-purple-600/30">
+                        <i class="fa-solid fa-gamepad"></i> Continuar Explorando
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-950 border-t border-gray-800/80 text-gray-400 py-10 mt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
+            <a href="../index.html" class="inline-flex items-center gap-2 text-xl font-black font-display text-white">
+                <i class="fa-solid fa-gamepad text-purple-500"></i> PIXEL<span class="text-purple-400">AREK</span>
+            </a>
+            <p class="text-xs text-gray-500 max-w-md mx-auto">
+                Tu plataforma especializada en claves de activación oficial para Steam, PlayStation Network, Xbox Live y Nintendo eShop.
+            </p>
+            <p class="text-xs text-gray-600">&copy; 2026 PixelArek. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../js/cart-store.js"></script>
+    <script src="../js/carrito.js"></script>
+</body>
+</html>
